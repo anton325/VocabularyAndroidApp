@@ -54,6 +54,16 @@ public class MisPalabras extends AppCompatActivity {
       languages = gson.fromJson(json,type);
     }
 
+    // dynamically add a button for each language
+    for (String language : languages) {
+      Button myButton = new Button(this);
+      myButton.setText(language);
+
+      LinearLayout ll = (LinearLayout)findViewById(R.id.buttonLayout);
+      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+      ll.addView(myButton, lp);
+    }
+
     // setup add language botton
     Button addLanguage = (Button) findViewById(R.id.anadirlengua);
     addLanguage.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +143,7 @@ public class MisPalabras extends AppCompatActivity {
         String nuevaLengua = textfieldNuevaLengua.getText().toString();
         addLanguage(nuevaLengua);
         addLanguageToSharedPreferences(languages);
+        popupWindow.dismiss();
       }
     });
     cancelPopup.setOnClickListener(new View.OnClickListener() {

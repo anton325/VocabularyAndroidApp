@@ -16,13 +16,15 @@
       tools:layout_editor_absoluteX="0dp"
       tools:layout_editor_absoluteY="0dp" />
 
-
   <LinearLayout
-      android:layout_below="@+id/toolbar"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_above="@+id/footer"
-      android:orientation="vertical">
+      android:layout_above="@+id/layoutAddBotton"
+      android:orientation="vertical"
+      android:id="@+id/buttonLayout"
+      android:paddingTop="50dp"
+      android:layout_below="@id/toolbar"
+      >
 
     <TextView
         android:layout_width="match_parent"
@@ -38,6 +40,17 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"
         android:textSize="20sp"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_above="@id/footer"
+      android:layout_width="fill_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/layoutAddBotton"
+      android:layout_below="@+id/buttonLayout"
+      android:orientation="vertical">
+
 
       <Button
           android:layout_width="match_parent"
@@ -55,6 +68,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
+      android:layout_below="@id/layoutAddBotton"
       android:id="@+id/footer"
       android:layout_alignParentBottom="true">
 
