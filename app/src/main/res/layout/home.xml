@@ -47,6 +47,7 @@
             android:layout_marginLeft="40dp"
             android:background="#aa83aa"
             android:text="Mis Palabras"
+            android:id="@+id/homeToMisPalabras"
             android:textColor="#ffffff"
             android:gravity="center"
             android:layout_marginTop="30dp"
