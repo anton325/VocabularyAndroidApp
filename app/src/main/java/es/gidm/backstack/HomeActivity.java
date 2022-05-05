@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-public class BaseActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
 
     RadioGroup radioGroup1;
@@ -15,7 +14,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
+        setContentView(R.layout.home);
 
 
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
@@ -28,20 +27,26 @@ public class BaseActivity extends AppCompatActivity {
                 Log.i("matching", "matching inside1 bro" + checkedId);
                 switch (checkedId)
                 {
-                    case R.id.matching:
+                    case R.id.home:
                         Log.i("matching", "matching inside1 matching" +  checkedId);
                         in=new Intent(getBaseContext(),Actividad1.class);
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.watchList:
+                    case R.id.palabras:
                         Log.i("matching", "matching inside1 watchlistAdapter" + checkedId);
 
                         in = new Intent(getBaseContext(), Actividad2.class);
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.rates:
+                    case R.id.aprender:
+                        Log.i("matching", "matching inside1 rate" + checkedId);
+                        in = new Intent(getBaseContext(),Actividad3.class);
+                        startActivity(in);
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.ajustes:
                         Log.i("matching", "matching inside1 rate" + checkedId);
                         in = new Intent(getBaseContext(),Actividad3.class);
                         startActivity(in);
