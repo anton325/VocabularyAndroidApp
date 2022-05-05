@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,11 +17,21 @@ import android.view.Gravity;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+
+import java.util.List;
+import java.util.ArrayList;
+
 
 public class MisPalabras extends AppCompatActivity {
 
 
   RadioGroup radioGroup1;
+  private ArrayList<String> languages;
+  private Gson gson;
+  private SharedPreferences sharedpreferences;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +42,17 @@ public class MisPalabras extends AppCompatActivity {
     toolbar.setTitle("Mis Palabras");
     // using toolbar as ActionBar
     setSupportActionBar(toolbar);
+
+    // get sharedpreferences
+    sharedpreferences = getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
+    // read out which languages we already have
+    gson = new Gson();
+    String json = sharedpreferences.getString("languages","");
+    languages = new ArrayList<String>();
+    if (!json.isEmpty()) {
+      Type type = new TypeToken<ArrayList<String>>(){}.getType();
+      languages = gson.fromJson(json,type);
+    }
 
     // setup add language botton
     Button addLanguage = (Button) findViewById(R.id.anadirlengua);
@@ -90,7 +113,7 @@ public class MisPalabras extends AppCompatActivity {
     // inflate the layout of the popup window
     LayoutInflater inflater = (LayoutInflater)
             getSystemService(LAYOUT_INFLATER_SERVICE);
-    View popupView = inflater.inflate(R.layout.popup_lengua, null);
+    final View popupView = inflater.inflate(R.layout.popup_lengua, null);
 
     // create the popup window
     int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -103,24 +126,30 @@ public class MisPalabras extends AppCompatActivity {
 
     Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
     Button addLengua = (Button) popupView.findViewById(R.id.afirmarlengua);
-//    addLengua.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v){
-//        int a = 3;
-//      }
-//    });
+    addLengua.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v){
+        EditText textfieldNuevaLengua = (EditText) popupView.findViewById(R.id.textoLengua);
+        String nuevaLengua = textfieldNuevaLengua.getText().toString();
+        addLanguage(nuevaLengua);
+        addLanguageToSharedPreferences(languages);
+      }
+    });
     cancelPopup.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         popupWindow.dismiss();
       }
     });
+  }
 
-   // Button
-
-
-
-
-
+  public void addLanguage(String language){
+    languages.add(language);
+  }
+  public void addLanguageToSharedPreferences(ArrayList<String> languages){
+    String json = gson.toJson(languages);
+    SharedPreferences.Editor editor = sharedpreferences.edit();
+    editor.putString("languages",json);
+    editor.commit();
   }
 }
