@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RadioGroup;
+import android.support.v7.widget.Toolbar;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -15,6 +16,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+        // assigning ID of the toolbar to a variable
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // using toolbar as ActionBar
+        setSupportActionBar(toolbar);
 
 
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
