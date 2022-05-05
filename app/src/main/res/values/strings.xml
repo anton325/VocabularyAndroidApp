@@ -1,0 +1,11 @@
+<resources>
+  <string name="app_name" translatable="false">Pila de actividades</string>
+  <string name="title_activity_actividad3">Activity 3</string>
+  <string name="title_activity_actividad1">Activity 1</string>
+  <string name="title_activity_actividad2">Activity 2</string>
+  <string name="texto_boton1">Start Activity 2</string>
+  <string name="texto_boton2">Start Activity 3</string>
+  <string name="texto_toast1">Starting Activity 2</string>
+  <string name="texto_toast2">Starting Activity 3</string>
+  <string name="texto_textView">You have reached Activity 3!</string>
+</resources>

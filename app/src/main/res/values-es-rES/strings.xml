@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="texto_boton1">Iniciar Actividad 2</string>
+  <string name="texto_boton2">Iniciar Actividad 3</string>
+  <string name="texto_toast1">Iniciando Actividad 2</string>
+  <string name="texto_toast2">Iniciando Actividad 3</string>
+  <string name="title_activity_actividad1">Actividad 1</string>
+  <string name="title_activity_actividad2">Actividad 2</string>
+  <string name="title_activity_actividad3">Actividad 3</string>
+  <string name="texto_textView">¡Has llegado a la actividad 3!</string>
+</resources>
