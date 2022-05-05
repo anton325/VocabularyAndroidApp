@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.RadioGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.view.Gravity;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 public class MisPalabras extends AppCompatActivity {
@@ -27,6 +30,16 @@ public class MisPalabras extends AppCompatActivity {
     toolbar.setTitle("Mis Palabras");
     // using toolbar as ActionBar
     setSupportActionBar(toolbar);
+
+    // setup add language botton
+    Button addLanguage = (Button) findViewById(R.id.anadirlengua);
+    addLanguage.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
+        onButtonShowPopupWindowClick(view);
+      }
+    });
 
 
 
@@ -84,18 +97,30 @@ public class MisPalabras extends AppCompatActivity {
     int height = LinearLayout.LayoutParams.WRAP_CONTENT;
     boolean focusable = true; // lets taps outside the popup also dismiss it
     final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
     // show the popup window
     // which view you pass in doesn't matter, it is only used for the window tolken
     popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-    // dismiss the popup window when touched
-//    popupView.setOnTouchListener(new View.OnTouchListener() {
+    Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
+    Button addLengua = (Button) popupView.findViewById(R.id.afirmarlengua);
+//    addLengua.setOnClickListener(new View.OnClickListener() {
 //      @Override
-//      public boolean onTouch(View v, MotionEvent event) {
-//        popupWindow.dismiss();
-//        return true;
+//      public void onClick(View v){
+//        int a = 3;
 //      }
 //    });
+    cancelPopup.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        popupWindow.dismiss();
+      }
+    });
+
+   // Button
+
+
+
+
+
   }
 }
