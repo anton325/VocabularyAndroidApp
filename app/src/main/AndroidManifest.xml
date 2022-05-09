@@ -20,7 +20,7 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".Actividad1"
+        android:name=".ListsInLanguage"
         android:label="@string/title_activity_actividad2"
         android:theme="@style/AppTheme.NoActionBar">
     </activity>

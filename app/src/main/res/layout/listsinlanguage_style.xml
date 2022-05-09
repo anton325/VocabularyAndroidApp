@@ -17,40 +17,41 @@
       tools:layout_editor_absoluteY="0dp" />
 
   <LinearLayout
+      android:id="@+id/buttonLayout"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_above="@id/anadirLista"
       android:orientation="vertical"
-      android:id="@+id/buttonLayout"
-      android:paddingTop="50dp"
-      android:layout_above="@id/anadirlengua"
-      >
+      android:paddingTop="50dp">
 
     <TextView
+        android:id="@+id/languageText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="1"
-        android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:background="#ff0000"
-        android:text="elije la lengua o añade una nueva!"
-        android:textColor="#ffffff"
-        android:gravity="center"
-        android:id="@+id/languageText"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="20dp"
-        android:textSize="20sp"/>
+        android:layout_weight="1"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:text="elije una lista o añade una nueva!"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
 
   </LinearLayout>
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center|bottom"
-        android:id="@+id/anadirlengua"
-        android:background="#f3a22a"
-        android:layout_above="@+id/footer"
-        android:text="nueva Lengua"/>
+
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:gravity="center|bottom"
+      android:id="@+id/anadirLista"
+      android:background="#f3a22a"
+      android:layout_above="@+id/footer"
+      android:text="nueva Lista"/>
 
 
   <LinearLayout

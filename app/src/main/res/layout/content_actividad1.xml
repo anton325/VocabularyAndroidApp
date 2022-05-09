@@ -5,8 +5,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
-  tools:context=".Actividad1"
-  tools:showIn="@layout/activity_actividad1">
+  tools:context=".ListsInLanguage"
+  tools:showIn="@layout/ListsInLanguageStyle">
 
   <Button
     android:id="@+id/button1"

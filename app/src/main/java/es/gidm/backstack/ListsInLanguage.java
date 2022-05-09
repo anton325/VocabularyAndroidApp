@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.view.Gravity;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,34 +25,42 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
-public class MisPalabras extends AppCompatActivity {
+public class ListsInLanguage extends AppCompatActivity {
 
 
   RadioGroup radioGroup1;
-  private ArrayList<String> languages;
+  private String selectedLanguage;
+  private ArrayList<String> listsOfLanguage;
   private Gson gson;
   private SharedPreferences sharedpreferences;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    Log.i("listsinlanguage","started");
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.mis_palabras);
+    setContentView(R.layout.listsinlanguage_style);
     // assigning ID of the toolbar to a variable
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setTitle("Mis Palabras");
+    toolbar.setTitle("Mis Listas");
     // using toolbar as ActionBar
     setSupportActionBar(toolbar);
+
+    // get intent
+    Intent i = getIntent();
+    selectedLanguage = i.getStringExtra("language");
+    Log.i("SelectedLang: ",selectedLanguage);
 
     // get sharedpreferences
     sharedpreferences = getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
     // read out which languages we already have
     gson = new Gson();
-    String json = sharedpreferences.getString("languages","");
-    languages = new ArrayList<String>();
+    String json = sharedpreferences.getString(selectedLanguage,"");
+    listsOfLanguage = new ArrayList<String>();
     if (!json.isEmpty()) {
       Type type = new TypeToken<ArrayList<String>>(){}.getType();
-      languages = gson.fromJson(json,type);
+      listsOfLanguage = gson.fromJson(json,type);
     }
+
 
     // dynamically add a button for each language
     // the onClickListener
@@ -59,16 +68,16 @@ public class MisPalabras extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         Log.i("StartIntent","test");
-        Log.i("StartIntent",languages.get(view.getId()));
-        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
-        i.putExtra("language", languages.get(view.getId()));
+        Log.i("StartIntent",listsOfLanguage.get(view.getId()));
+        Intent i = new Intent(getBaseContext(), Actividad3.class);
+        i.putExtra("list", listsOfLanguage.get(view.getId()));
         startActivity(i);
       }
     };
     // and save them in array
     ArrayList<Button> buttons = new ArrayList<Button>();
     int buttonID = 0;
-    for (final String list : languages) {
+    for (final String list : listsOfLanguage) {
       Button myButton = new Button(this);
       myButton.setText(list);
       myButton.setOnClickListener(btnclick);
@@ -81,9 +90,10 @@ public class MisPalabras extends AppCompatActivity {
       buttons.add(myButton);
     }
 
-    // setup add language botton
-    Button addLanguage = (Button) findViewById(R.id.anadirlengua);
-    addLanguage.setOnClickListener(new View.OnClickListener() {
+
+    // setup add list botton
+    Button addList = (Button) findViewById(R.id.anadirLista);
+    addList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
@@ -136,6 +146,8 @@ public class MisPalabras extends AppCompatActivity {
     });
   }
   public void onButtonShowPopupWindowClick(View view) {
+    Log.i("listsinlanguage","popup");
+
 
     // inflate the layout of the popup window
     LayoutInflater inflater = (LayoutInflater)
@@ -150,19 +162,21 @@ public class MisPalabras extends AppCompatActivity {
     // show the popup window
     // which view you pass in doesn't matter, it is only used for the window tolken
     popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
+    TextView popupText = (TextView) popupView.findViewById(R.id.popupText);
+    popupText.setText("Entra la lista nueva que quieres añadir.");
     Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
-    Button addLengua = (Button) popupView.findViewById(R.id.afirmarlengua);
-    addLengua.setOnClickListener(new View.OnClickListener() {
+    Button addList = (Button) popupView.findViewById(R.id.afirmarlengua);
+    addList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v){
         EditText textfieldNuevaLengua = (EditText) popupView.findViewById(R.id.textoLengua);
-        String nuevaLengua = textfieldNuevaLengua.getText().toString();
-        addLanguage(nuevaLengua);
-        addLanguageToSharedPreferences(languages);
+        String nuevaList = textfieldNuevaLengua.getText().toString();
+        addList(nuevaList);
+        addListToSharedPreferences(listsOfLanguage);
         popupWindow.dismiss();
         // restart this screen
-        Intent i = new Intent(getBaseContext(), MisPalabras.class);
+        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
+        i.putExtra("language",selectedLanguage);
         startActivity(i);
       }
     });
@@ -174,13 +188,13 @@ public class MisPalabras extends AppCompatActivity {
     });
   }
 
-  public void addLanguage(String language){
-    languages.add(language);
+  public void addList(String list){
+    listsOfLanguage.add(list);
   }
-  public void addLanguageToSharedPreferences(ArrayList<String> languages){
-    String json = gson.toJson(languages);
+  public void addListToSharedPreferences(ArrayList<String> listsOfLanguage){
+    String json = gson.toJson(listsOfLanguage);
     SharedPreferences.Editor editor = sharedpreferences.edit();
-    editor.putString("languages",json);
+    editor.putString(selectedLanguage,json);
     editor.commit();
   }
 }
