@@ -103,7 +103,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       @Override
       public void onClick(View view) {
         Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
-        onButtonShowPopupWindowClick(view);
+        onButtonShowPopupWindowClick(view,"","");
       }
     });
 
@@ -153,10 +153,14 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
   }
   @Override
   public void onItemClick(View view, int position) {
-    Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+//    Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+    String key = keys.get(position);
+    String value = wordsAndTranslations.get(key);
+    onButtonShowPopupWindowClick(view,key,value);
+
   }
 
-  public void onButtonShowPopupWindowClick(View view) {
+  public void onButtonShowPopupWindowClick(View view,String key, String value) {
     Log.i("palabras","popup");
 
     // inflate the layout of the popup window
@@ -174,13 +178,17 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
     TextView popupText = (TextView) popupView.findViewById(R.id.popupText);
     popupText.setText("Entra la traduccion nueva que quieres añadir.");
+    final EditText textfieldWord = (EditText) popupView.findViewById(R.id.word);
+    textfieldWord.setText(key);
+    final EditText textfieldTranslation = (EditText) popupView.findViewById(R.id.translation);
+    textfieldTranslation.setText(value);
+
     Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
     Button addList = (Button) popupView.findViewById(R.id.afirmarlengua);
+
     addList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v){
-        EditText textfieldWord = (EditText) popupView.findViewById(R.id.word);
-        EditText textfieldTranslation = (EditText) popupView.findViewById(R.id.translation);
         String word = textfieldWord.getText().toString();
         String translation = textfieldTranslation.getText().toString();
 
