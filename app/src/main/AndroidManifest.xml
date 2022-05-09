@@ -30,7 +30,7 @@
       android:theme="@style/AppTheme.NoActionBar">
     </activity>
     <activity
-      android:name=".Actividad3"
+      android:name=".Palabras"
       android:label="@string/title_activity_actividad3"
       android:theme="@style/AppTheme.NoActionBar" >
     </activity>

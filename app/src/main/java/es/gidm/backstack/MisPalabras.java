@@ -38,7 +38,7 @@ public class MisPalabras extends AppCompatActivity {
     setContentView(R.layout.mis_palabras);
     // assigning ID of the toolbar to a variable
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    toolbar.setTitle("Mis Palabras");
+    toolbar.setTitle("Mis Lenguas");
     // using toolbar as ActionBar
     setSupportActionBar(toolbar);
 
@@ -118,14 +118,14 @@ public class MisPalabras extends AppCompatActivity {
             break;
           case R.id.aprender:
             Log.i("matching", "matching inside1 rate" + checkedId);
-            in = new Intent(getBaseContext(),Actividad3.class);
+            in = new Intent(getBaseContext(), Palabras.class);
             startActivity(in);
             overridePendingTransition(0, 0);
             break;
           case R.id.ajustes:
 
             Log.i("matching", "matching inside1 rate" + checkedId);
-            in = new Intent(getBaseContext(),Actividad3.class);
+            in = new Intent(getBaseContext(), Palabras.class);
             startActivity(in);
             overridePendingTransition(0, 0);
             break;

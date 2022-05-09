@@ -61,13 +61,13 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.aprender:
                         Log.i("matching", "matching inside1 rate" + checkedId);
-                        in = new Intent(getBaseContext(),Actividad3.class);
+                        in = new Intent(getBaseContext(), Palabras.class);
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.ajustes:
                         Log.i("matching", "matching inside1 rate" + checkedId);
-                        in = new Intent(getBaseContext(),Actividad3.class);
+                        in = new Intent(getBaseContext(), Palabras.class);
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;

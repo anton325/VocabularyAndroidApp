@@ -69,7 +69,7 @@ public class ListsInLanguage extends AppCompatActivity {
       public void onClick(View view) {
         Log.i("StartIntent","test");
         Log.i("StartIntent",listsOfLanguage.get(view.getId()));
-        Intent i = new Intent(getBaseContext(), Actividad3.class);
+        Intent i = new Intent(getBaseContext(), Palabras.class);
         i.putExtra("list", listsOfLanguage.get(view.getId()));
         startActivity(i);
       }
@@ -128,14 +128,14 @@ public class ListsInLanguage extends AppCompatActivity {
             break;
           case R.id.aprender:
             Log.i("matching", "matching inside1 rate" + checkedId);
-            in = new Intent(getBaseContext(),Actividad3.class);
+            in = new Intent(getBaseContext(), Palabras.class);
             startActivity(in);
             overridePendingTransition(0, 0);
             break;
           case R.id.ajustes:
 
             Log.i("matching", "matching inside1 rate" + checkedId);
-            in = new Intent(getBaseContext(),Actividad3.class);
+            in = new Intent(getBaseContext(), Palabras.class);
             startActivity(in);
             overridePendingTransition(0, 0);
             break;
