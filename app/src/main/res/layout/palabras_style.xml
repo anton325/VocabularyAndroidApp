@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+  <android.support.v7.widget.Toolbar
+      android:id="@id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="?attr/colorPrimary"
+      android:minHeight="20dp"
+      android:theme="?attr/actionBarTheme"
+      tools:layout_editor_absoluteX="0dp"
+      tools:layout_editor_absoluteY="0dp"
+      android:layout_above="@id/buttonLayout"/>
+
+  <LinearLayout
+      android:id="@+id/buttonLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:paddingTop="50dp">
+
+    <TextView
+        android:id="@+id/languageText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:maxLines="3"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:text="elije una lista o añade una nueva!"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+  </LinearLayout>
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/rvAnimals"
+      android:layout_width="fill_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/buttonLayout"
+      android:layout_above="@id/anadirPalabra"/>
+
+
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:gravity="center|bottom"
+      android:id="@+id/anadirPalabra"
+      android:background="#f3a22a"
+      android:text="nueva palabra"
+      android:layout_above="@id/footer"/>
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:id="@+id/footer"
+      android:layout_alignParentBottom="true">
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+      <RadioButton
+          android:layout_width="match_parent"
+          android:gravity="center"
+          android:layout_height="match_parent"
+          android:text="Home"
+          android:layout_weight="1"
+          android:button="@null"
+          android:padding="2dp"
+          android:checked="false"
+          android:textSize="12sp"
+          android:id="@+id/home"/>
+
+      <RadioButton
+          android:layout_width="match_parent"
+          android:gravity="center"
+          android:layout_height="match_parent"
+          android:text="Mis Palabras"
+          android:layout_weight="1"
+          android:button="@null"
+          android:padding="2dp"
+          android:checked="false"
+          android:textSize="12sp"
+          android:id="@+id/palabras"/>
+
+      <RadioButton
+          android:layout_width="match_parent"
+          android:gravity="center"
+          android:layout_height="match_parent"
+          android:button="@null"
+          android:layout_weight="1"
+          android:padding="2dp"
+          android:checked="false"
+          android:textSize="12sp"
+          android:id="@+id/aprender"
+          android:text="Aprender"/>
+
+      <RadioButton
+          android:layout_width="match_parent"
+          android:gravity="center"
+          android:layout_height="match_parent"
+          android:id="@+id/ajustes"
+          android:button="@null"
+          android:paddingTop="5dp"
+          android:paddingBottom="2dp"
+          android:paddingLeft="2dp"
+          android:paddingRight="2dp"
+          android:layout_weight="1"
+          android:checked="false"
+          android:textSize="12sp"
+          android:text="Ajustes"/>
+
+    </RadioGroup>
+  </LinearLayout>
+
+</RelativeLayout>
