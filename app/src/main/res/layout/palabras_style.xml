@@ -9,16 +9,16 @@
   <android.support.v7.widget.Toolbar
       android:id="@id/toolbar"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:background="?attr/colorPrimary"
       android:minHeight="20dp"
       android:theme="?attr/actionBarTheme"
       tools:layout_editor_absoluteX="0dp"
-      tools:layout_editor_absoluteY="0dp"
-      android:layout_above="@id/buttonLayout"/>
+      tools:layout_editor_absoluteY="0dp" />
 
   <LinearLayout
       android:id="@+id/buttonLayout"
+      android:layout_below="@id/toolbar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
@@ -37,7 +37,7 @@
         android:layout_weight="1"
         android:background="#ff0000"
         android:gravity="center"
-        android:text="elije una lista o añade una nueva!"
+        android:text="Gastionar tus palabras y añade nuevas!"
         android:textColor="#ffffff"
         android:textSize="20sp" />
 

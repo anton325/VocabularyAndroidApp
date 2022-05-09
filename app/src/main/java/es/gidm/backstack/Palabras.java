@@ -22,6 +22,12 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     super.onCreate(savedInstanceState);
     setContentView(R.layout.palabras_style);
 
+    // assigning ID of the toolbar to a variable
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setTitle("Mis Palabras");
+    // using toolbar as ActionBar
+    setSupportActionBar(toolbar);
+
     // data to populate the RecyclerView with
     ArrayList<String> animalNames = new ArrayList<>();
     animalNames.add("Horse");
