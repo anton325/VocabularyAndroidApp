@@ -44,12 +44,11 @@
   </LinearLayout>
 
   <android.support.v7.widget.RecyclerView
-      android:id="@+id/rvAnimals"
+      android:id="@+id/recyclerWords"
       android:layout_width="fill_parent"
       android:layout_height="match_parent"
       android:layout_below="@id/buttonLayout"
       android:layout_above="@id/anadirPalabra"/>
-
 
 
   <Button
