@@ -64,7 +64,7 @@ public class AprenderLanguages extends AppCompatActivity {
             public void onClick(View view) {
                 Log.i("StartIntent","test");
                 Log.i("StartIntent",languages.get(view.getId()));
-                Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
+                Intent i = new Intent(getBaseContext(), AprenderSelectLanguages.class);
                 i.putExtra("language", languages.get(view.getId()));
                 startActivity(i);
             }

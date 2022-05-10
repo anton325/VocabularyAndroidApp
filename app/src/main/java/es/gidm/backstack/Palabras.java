@@ -30,7 +30,6 @@ import java.util.HashMap;
 public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
   MyRecyclerViewAdapter adapter;
   RadioGroup radioGroup1;
-  private String selectedList;
   private SharedPreferences sharedpreferences;
   private Gson gson;
   private HashMap<String,String> wordsAndTranslations;

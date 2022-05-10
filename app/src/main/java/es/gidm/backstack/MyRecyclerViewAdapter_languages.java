@@ -15,13 +15,15 @@ public class MyRecyclerViewAdapter_languages extends RecyclerView.Adapter<MyRecy
         .ViewHolder> {
 
     private List<String> lists;
+    private HashMap<String,Integer> colors;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    MyRecyclerViewAdapter_languages(Context context, List<String> lists) {
+    MyRecyclerViewAdapter_languages(Context context, List<String> lists, HashMap<String,Integer> colors) {
         this.mInflater = LayoutInflater.from(context);
         this.lists = lists;
+        this.colors = colors;
     }
 
     // inflates the row layout from xml when needed
@@ -36,6 +38,14 @@ public class MyRecyclerViewAdapter_languages extends RecyclerView.Adapter<MyRecy
     public void onBindViewHolder(ViewHolder holder, int position) {
         String listName = lists.get(position);
         holder.listName.setText(listName);
+        if(colors.get(lists.get(position)) == 1) {
+            // color background
+            holder.listName.setBackgroundColor(0xfff00000);
+        }
+        else {
+            // dont color background
+            holder.listName.setBackgroundColor(0xaea12aa2);
+        }
     }
 
     // total number of rows

@@ -52,7 +52,7 @@ public class ListsInLanguage extends AppCompatActivity {
 
     // get sharedpreferences
     sharedpreferences = getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
-    // read out which languages we already have
+    // read out which lists we already have for this language
     gson = new Gson();
     String json = sharedpreferences.getString(selectedLanguage,"");
     listsOfLanguage = new ArrayList<String>();
@@ -63,7 +63,7 @@ public class ListsInLanguage extends AppCompatActivity {
 
 
     // dynamically add a button for each language
-    // the onClickListener
+    // the onClickListener they're all gonna share
     View.OnClickListener btnclick = new View.OnClickListener() {
       @Override
       public void onClick(View view) {

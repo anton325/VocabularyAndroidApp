@@ -39,6 +39,11 @@
         android:label="Aprender_languages"
         android:theme="@style/AppTheme.NoActionBar" >
     </activity>
+    <activity
+        android:name=".AprenderSelectLanguages"
+        android:label="Aprender_Selectlanguages"
+        android:theme="@style/AppTheme.NoActionBar" >
+    </activity>
   </application>
 
 </manifest>
