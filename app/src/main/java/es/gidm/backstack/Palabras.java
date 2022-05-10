@@ -38,6 +38,8 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
   private String nameTranslationList;
   private String nameSelectedList;
 
+  private int scrollToPosition;
+  private LinearLayoutManager myllm;
 
 
 
@@ -56,6 +58,13 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     // get intent
     Intent i = getIntent();
     nameSelectedList = i.getStringExtra("list");
+
+//    try {
+//      scrollToPosition = i.getIntExtra("scrollToPosition",0);
+//    }
+//    catch (Exception e){
+//      scrollToPosition = 0;
+//    }
     Log.i("SelectedList: ",nameSelectedList);
 
     // get sharedpreferences
@@ -90,7 +99,9 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
 
     // set up the RecyclerView
     RecyclerView recyclerView = findViewById(R.id.recyclerWords);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    myllm = new LinearLayoutManager(this);
+    myllm.scrollToPositionWithOffset(scrollToPosition, 0);
+    recyclerView.setLayoutManager(myllm);
     adapter = new MyRecyclerViewAdapter(this, keys,wordsAndTranslations);
     adapter.setClickListener(this);
     recyclerView.setAdapter(adapter);
@@ -103,7 +114,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       @Override
       public void onClick(View view) {
         Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
-        onButtonShowPopupWindowClick(view,"","");
+        onButtonShowPopupWindowClick(view,"","",Boolean.FALSE);
       }
     });
 
@@ -156,11 +167,13 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
 //    Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     String key = keys.get(position);
     String value = wordsAndTranslations.get(key);
-    onButtonShowPopupWindowClick(view,key,value);
-
+    // delete the old values from memory to make space for the new ones
+    wordsAndTranslations.remove(key);
+    keys.remove(key);
+    onButtonShowPopupWindowClick(view,key,value,Boolean.TRUE);
   }
 
-  public void onButtonShowPopupWindowClick(View view,String key, String value) {
+  public void onButtonShowPopupWindowClick(View view,String key, String value, Boolean existing) {
     Log.i("palabras","popup");
 
     // inflate the layout of the popup window
@@ -184,7 +197,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     textfieldTranslation.setText(value);
 
     Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
-    Button addList = (Button) popupView.findViewById(R.id.afirmarlengua);
+    Button addList = (Button) popupView.findViewById(R.id.afirmarPalabra);
 
     addList.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -199,10 +212,15 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
         addHashmapToSharedPreferences(wordsAndTranslations);
 
         popupWindow.dismiss();
+        adapter.notifyItemInserted(keys.size());
+        myllm.scrollToPositionWithOffset(keys.size() - 1, 0);
+
+        // scroll to that item
+
         // restart this screen
-        Intent i = new Intent(getBaseContext(), Palabras.class);
-        i.putExtra("list",nameSelectedList);
-        startActivity(i);
+//        Intent i = new Intent(getBaseContext(), Palabras.class);
+//        i.putExtra("list",nameSelectedList);
+//        startActivity(i);
       }
     });
     cancelPopup.setOnClickListener(new View.OnClickListener() {
@@ -211,6 +229,24 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
         popupWindow.dismiss();
       }
     });
+    Button deleteWord = (Button) popupView.findViewById(R.id.borrarPalabra);
+    deleteWord.setVisibility(View.INVISIBLE);
+    if(existing) {
+      deleteWord.setVisibility(View.VISIBLE);
+      deleteWord.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          addListToSharedPreferences(keys);
+          addHashmapToSharedPreferences(wordsAndTranslations);
+          popupWindow.dismiss();
+          // restart this screen
+          Intent i = new Intent(getBaseContext(), Palabras.class);
+          i.putExtra("list",nameSelectedList);
+          startActivity(i);
+          //adapter.notifyItemRemoved(removeIndex);
+        }
+      });
+    }
   }
 
   public void addToList(ArrayList<String> list, String key){

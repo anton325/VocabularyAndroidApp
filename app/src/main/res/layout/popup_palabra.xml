@@ -46,7 +46,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/afirmarlengua"
+            android:id="@+id/afirmarPalabra"
             android:text="Anadir"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/borrarPalabra"
+            android:text="Borrar"/>
     </LinearLayout>
 </LinearLayout>
