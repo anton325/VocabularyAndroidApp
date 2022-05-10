@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
@@ -25,12 +26,23 @@ public class HomeActivity extends AppCompatActivity {
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
 
+
         Button toMisPalabras = (Button) findViewById(R.id.homeToMisPalabras);
         toMisPalabras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"go to misPalabras",Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getBaseContext(),MisPalabras.class);
+                startActivity(i);
+            }
+        });
+
+        Button toAprender = (Button) findViewById(R.id.home_aprender);
+        toAprender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "to to aprender", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getBaseContext(), AprenderLanguages.class);
                 startActivity(i);
             }
         });

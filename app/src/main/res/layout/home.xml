@@ -62,6 +62,7 @@
             android:layout_weight="1"
             android:background="#f3a12e"
             android:text="Aprender"
+            android:id="@+id/home_aprender"
             android:textColor="#ffffff"
             android:gravity="center"
             android:layout_marginTop="30dp"
