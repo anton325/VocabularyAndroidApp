@@ -114,7 +114,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       @Override
       public void onClick(View view) {
         Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
-        onButtonShowPopupWindowClick(view,"","",Boolean.FALSE);
+        onButtonShowPopupWindowClick(view,"","",Boolean.FALSE,0);
       }
     });
 
@@ -170,10 +170,10 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     // delete the old values from memory to make space for the new ones
     wordsAndTranslations.remove(key);
     keys.remove(key);
-    onButtonShowPopupWindowClick(view,key,value,Boolean.TRUE);
+    onButtonShowPopupWindowClick(view,key,value,Boolean.TRUE,position);
   }
 
-  public void onButtonShowPopupWindowClick(View view,String key, String value, Boolean existing) {
+  public void onButtonShowPopupWindowClick(View view, String key, String value, Boolean existing, final int position) {
     Log.i("palabras","popup");
 
     // inflate the layout of the popup window
@@ -240,10 +240,10 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
           addHashmapToSharedPreferences(wordsAndTranslations);
           popupWindow.dismiss();
           // restart this screen
-          Intent i = new Intent(getBaseContext(), Palabras.class);
-          i.putExtra("list",nameSelectedList);
-          startActivity(i);
-          //adapter.notifyItemRemoved(removeIndex);
+//          Intent i = new Intent(getBaseContext(), Palabras.class);
+//          i.putExtra("list",nameSelectedList);
+//          startActivity(i);
+          adapter.notifyItemRemoved(position);
         }
       });
     }
