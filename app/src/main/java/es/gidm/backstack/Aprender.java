@@ -170,13 +170,6 @@ public class Aprender extends AppCompatActivity {
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.ajustes:
-
-                        Log.i("matching", "matching inside1 rate" + checkedId);
-                        in = new Intent(getBaseContext(), Palabras.class);
-                        startActivity(in);
-                        overridePendingTransition(0, 0);
-                        break;
                     default:
                         break;
                 }
