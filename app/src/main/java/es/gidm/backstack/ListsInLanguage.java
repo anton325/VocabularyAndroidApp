@@ -1,6 +1,8 @@
 package es.gidm.backstack;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -149,6 +151,12 @@ public class ListsInLanguage extends AppCompatActivity {
     int height = LinearLayout.LayoutParams.WRAP_CONTENT;
     boolean focusable = true; // lets taps outside the popup also dismiss it
     final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+    // make it close on touch outside of popup window
+    popupWindow.setOutsideTouchable(true);
+    popupWindow.setFocusable(true);
+    popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
     // show the popup window
     // which view you pass in doesn't matter, it is only used for the window tolken
     popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
@@ -202,6 +210,11 @@ public class ListsInLanguage extends AppCompatActivity {
     int height = LinearLayout.LayoutParams.WRAP_CONTENT;
     boolean focusable = true; // lets taps outside the popup also dismiss it
     final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+    // make it close on touch outside of popup window
+    popupWindow.setOutsideTouchable(true);
+    popupWindow.setFocusable(true);
+    popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
     final TextView tvEdit = (TextView) popupView.findViewById(R.id.fieldToEdit);
     tvEdit.setText(listsOfLanguage.get(buttonID));

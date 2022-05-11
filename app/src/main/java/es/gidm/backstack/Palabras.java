@@ -3,6 +3,8 @@ package es.gidm.backstack;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -113,7 +115,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       @Override
       public void onClick(View view) {
         Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
-        onButtonShowPopupWindowClick(view,"","",Boolean.FALSE,0);
+        onButtonShowPopupWindowClick(view,"","",Boolean.FALSE,0,0);
       }
     });
 
@@ -159,13 +161,10 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
 //    Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     String key = keys.get(position);
     String value = wordsAndTranslations.get(key);
-    // delete the old values from memory to make space for the new ones
-    wordsAndTranslations.remove(key);
-    keys.remove(key);
-    onButtonShowPopupWindowClick(view,key,value,Boolean.TRUE,position);
+    onButtonShowPopupWindowClick(view,key,value,Boolean.TRUE,position,1);
   }
 
-  public void onButtonShowPopupWindowClick(View view, String key, String value, Boolean existing, final int position) {
+  public void onButtonShowPopupWindowClick(View view, final String key, final String value, Boolean existing, final int position, final int editing) {
     Log.i("palabras","popup");
 
     // inflate the layout of the popup window
@@ -178,6 +177,12 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     int height = LinearLayout.LayoutParams.WRAP_CONTENT;
     boolean focusable = true; // lets taps outside the popup also dismiss it
     final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+    // make it close on touch outside of popup window
+    popupWindow.setOutsideTouchable(true);
+    popupWindow.setFocusable(true);
+    popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
     // show the popup window
     // which view you pass in doesn't matter, it is only used for the window tolken
     popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
@@ -194,18 +199,38 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     addList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v){
+
         String word = textfieldWord.getText().toString();
         String translation = textfieldTranslation.getText().toString();
 
-        addToList(keys,word);
-        addToHashmap(wordsAndTranslations,word,translation);
+        // edit the old values in memory
+        if(editing == 1) {
+          // this entry has already existed before
+          int index = keys.indexOf(key);
+          keys.remove(key);
+          keys.add(index,word);
+          wordsAndTranslations.remove(key);
+          wordsAndTranslations.put(word,translation);
+        }
+        else {
+          addToList(keys,word);
+          addToHashmap(wordsAndTranslations,word,translation);
+        }
 
         addListToSharedPreferences(keys);
         addHashmapToSharedPreferences(wordsAndTranslations);
 
         popupWindow.dismiss();
-        adapter.notifyItemInserted(keys.size());
-        myllm.scrollToPositionWithOffset(keys.size() - 1, 0);
+        if(editing == 1) {
+          Log.i("palabras","edited");
+          Log.i("palabras","pos "+Integer.toString(position));
+          adapter.notifyItemChanged(position);
+        }
+        else {
+          Log.i("palabras","add new");
+          adapter.notifyItemInserted(keys.size()-1);
+          myllm.scrollToPositionWithOffset(keys.size()-1, 0);
+        }
 
         // scroll to that item
 
@@ -218,11 +243,11 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     cancelPopup.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        String word = textfieldWord.getText().toString();
-        String translation = textfieldTranslation.getText().toString();
-
-        addToList(keys,word);
-        addToHashmap(wordsAndTranslations,word,translation);
+//        String word = textfieldWord.getText().toString();
+//        String translation = textfieldTranslation.getText().toString();
+//
+//        addToList(keys,word);
+//        addToHashmap(wordsAndTranslations,word,translation);
 
         addListToSharedPreferences(keys);
         addHashmapToSharedPreferences(wordsAndTranslations);
@@ -236,6 +261,9 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       deleteWord.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+          // delete the old values from memory to make space for the new ones
+          wordsAndTranslations.remove(key);
+          keys.remove(key);
           addListToSharedPreferences(keys);
           addHashmapToSharedPreferences(wordsAndTranslations);
           popupWindow.dismiss();
