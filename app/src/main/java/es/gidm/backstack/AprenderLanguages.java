@@ -116,7 +116,7 @@ public class AprenderLanguages extends AppCompatActivity {
                         break;
                     case R.id.aprender:
                         Log.i("matching", "matching inside1 rate" + checkedId);
-                        in = new Intent(getBaseContext(), Aprender.class);
+                        in = new Intent(getBaseContext(), AprenderLanguages.class);
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
