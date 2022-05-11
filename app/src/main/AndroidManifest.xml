@@ -49,6 +49,11 @@
         android:label="Aprender_screen"
         android:theme="@style/AppTheme.NoActionBar" >
     </activity>
+    <activity
+        android:name=".Buscar"
+        android:label="Buscar_screen"
+        android:theme="@style/AppTheme.NoActionBar" >
+    </activity>
   </application>
 
 </manifest>

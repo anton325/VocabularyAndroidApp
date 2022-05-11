@@ -9,9 +9,11 @@
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.1" />
         <entry key="app/src/main/res/layout/aprender_languages.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/aprender_screen.xml" value="0.2375" />
+        <entry key="app/src/main/res/layout/buscar_style.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/content_actividad1.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/content_actividad2.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/content_actividad3.xml" value="0.10677083333333333" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/listsinlanguage_style.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/mis_palabras.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/palabras_style.xml" value="0.2375" />

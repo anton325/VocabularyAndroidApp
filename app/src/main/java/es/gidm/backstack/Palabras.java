@@ -60,18 +60,12 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     Intent i = getIntent();
     nameSelectedList = i.getStringExtra("list");
 
-//    try {
-//      scrollToPosition = i.getIntExtra("scrollToPosition",0);
-//    }
-//    catch (Exception e){
-//      scrollToPosition = 0;
-//    }
     Log.i("SelectedList: ",nameSelectedList);
 
     // get sharedpreferences
     sharedpreferences = getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
 
-    // read out which the keys (left side of translation)
+    // read out the keys (left side of translation)
     gson = new Gson();
     String json;
     json = sharedpreferences.getString(nameSelectedList,"");
