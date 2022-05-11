@@ -33,11 +33,11 @@
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:background="#ff0000"
-        android:text="elije la lengua o añade una nueva!"
+        android:text="Elije la lengua o añade una nueva!"
         android:textColor="#ffffff"
         android:gravity="center"
         android:id="@+id/languageText"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="20dp"
         android:textSize="20sp"/>
 
@@ -47,7 +47,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:gravity="center|bottom"
+        android:gravity="center"
         android:id="@+id/anadirlengua"
         android:background="#f3a22a"
         android:layout_above="@+id/footer"

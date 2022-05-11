@@ -31,7 +31,7 @@
         android:singleLine="false"
         android:maxLines="3"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="20dp"
         android:background="#ff0000"
@@ -46,8 +46,8 @@
 
   <Button
       android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:gravity="center|bottom"
+      android:layout_height="40dp"
+      android:gravity="center"
       android:id="@+id/anadirLista"
       android:background="#f3a22a"
       android:layout_above="@+id/footer"

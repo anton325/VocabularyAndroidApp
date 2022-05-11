@@ -240,6 +240,10 @@ public class MisPalabras extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         deleteLanguage(languages.get(buttonID));
+
+        // delete all the associated lists and words
+
+
         addLanguageToSharedPreferences(languages);
         popupWindow.dismiss();
         // restart this screen

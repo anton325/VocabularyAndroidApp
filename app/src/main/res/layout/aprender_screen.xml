@@ -65,7 +65,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center|bottom"
+        android:gravity="center"
         android:id="@+id/buttonSolution"
         android:background="#f3a22a"
         android:layout_above="@+id/footer"

@@ -22,7 +22,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:paddingTop="50dp">
+      android:paddingTop="20dp">
 
     <TextView
         android:id="@+id/languageText"
@@ -31,7 +31,6 @@
         android:singleLine="false"
         android:maxLines="3"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="5dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="20dp"
         android:layout_weight="1"
@@ -48,13 +47,15 @@
       android:layout_width="fill_parent"
       android:layout_height="match_parent"
       android:layout_below="@id/buttonLayout"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
       android:layout_above="@id/anadirPalabra"/>
 
 
   <Button
       android:layout_width="match_parent"
-      android:layout_height="60dp"
-      android:gravity="center|bottom"
+      android:layout_height="40dp"
+      android:gravity="center"
       android:id="@+id/anadirPalabra"
       android:background="#f3a22a"
       android:text="nueva palabra"
