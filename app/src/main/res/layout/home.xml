@@ -68,6 +68,20 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:textSize="20sp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_weight="1"
+            android:background="#f3a12e"
+            android:text="Buscar"
+            android:id="@+id/home_buscar"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20sp"/>
 
 
     </LinearLayout>

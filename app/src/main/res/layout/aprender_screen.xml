@@ -121,7 +121,17 @@
                 android:textSize="12sp"
                 android:id="@+id/aprender"
                 android:text="Aprender"/>
-
+            <RadioButton
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:checked="false"
+                android:textSize="12sp"
+                android:id="@+id/buscar"
+                android:text="Buscar"/>
         </RadioGroup>
     </LinearLayout>
 </RelativeLayout>

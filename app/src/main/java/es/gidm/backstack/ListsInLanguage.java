@@ -131,6 +131,12 @@ public class ListsInLanguage extends AppCompatActivity {
             startActivity(in);
             overridePendingTransition(0, 0);
             break;
+          case R.id.buscar:
+            Log.i("matching", "matching inside1 rate" + checkedId);
+            in = new Intent(getBaseContext(), Buscar.class);
+            startActivity(in);
+            overridePendingTransition(0, 0);
+            break;
           default:
             break;
         }

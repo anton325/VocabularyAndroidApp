@@ -47,6 +47,16 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        Button toBuscar = (Button) findViewById(R.id.home_buscar);
+        toBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "to buscar", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getBaseContext(), Buscar.class);
+                startActivity(i);
+            }
+        });
+
 
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
