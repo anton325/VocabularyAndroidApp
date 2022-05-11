@@ -110,11 +110,12 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
         addList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), AprenderSelectLanguages.class);
+                Intent i = new Intent(getBaseContext(), Aprender.class);
                 Bundle args = new Bundle();
                 // tell the next class which lists have been selected
                 args.putSerializable("ARRAYLIST",(Serializable) selectedLists);
                 i.putExtra("BUNDLE",args);
+//                i.putExtra("selectedLang",selectedLanguage);
                 startActivity(i);
             }
         });
