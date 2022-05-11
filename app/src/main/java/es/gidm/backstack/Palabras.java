@@ -225,6 +225,14 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     cancelPopup.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        String word = textfieldWord.getText().toString();
+        String translation = textfieldTranslation.getText().toString();
+
+        addToList(keys,word);
+        addToHashmap(wordsAndTranslations,word,translation);
+
+        addListToSharedPreferences(keys);
+        addHashmapToSharedPreferences(wordsAndTranslations);
         popupWindow.dismiss();
       }
     });

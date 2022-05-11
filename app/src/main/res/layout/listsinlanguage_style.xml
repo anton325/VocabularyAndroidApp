@@ -34,7 +34,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="20dp"
-        android:layout_weight="1"
         android:background="#ff0000"
         android:gravity="center"
         android:text="elije una lista o añade una nueva!"
@@ -42,7 +41,6 @@
         android:textSize="20sp" />
 
   </LinearLayout>
-
 
 
 

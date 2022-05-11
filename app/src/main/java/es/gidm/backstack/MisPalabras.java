@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.view.Gravity;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -58,13 +59,11 @@ public class MisPalabras extends AppCompatActivity {
     View.OnClickListener btnclick = new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Log.i("StartIntent","test");
-        Log.i("StartIntent",languages.get(view.getId()));
-        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
-        i.putExtra("language", languages.get(view.getId()));
-        startActivity(i);
+        Toast.makeText(getApplicationContext(), "show popup_edit", Toast.LENGTH_SHORT).show();
+        onButtonShowPopupWindowClickEdit(view, view.getId());
       }
     };
+
     // and save them in array
     ArrayList<Button> buttons = new ArrayList<Button>();
     int buttonID = 0;
@@ -123,7 +122,6 @@ public class MisPalabras extends AppCompatActivity {
             overridePendingTransition(0, 0);
             break;
           case R.id.ajustes:
-
             Log.i("matching", "matching inside1 rate" + checkedId);
             in = new Intent(getBaseContext(), Palabras.class);
             startActivity(in);
@@ -136,7 +134,6 @@ public class MisPalabras extends AppCompatActivity {
     });
   }
   public void onButtonShowPopupWindowClick(View view) {
-
     // inflate the layout of the popup window
     LayoutInflater inflater = (LayoutInflater)
             getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -177,10 +174,86 @@ public class MisPalabras extends AppCompatActivity {
   public void addLanguage(String language){
     languages.add(language);
   }
+  public void deleteLanguage(String language) {
+    languages.remove(language);
+  }
+
   public void addLanguageToSharedPreferences(ArrayList<String> languages){
     String json = gson.toJson(languages);
     SharedPreferences.Editor editor = sharedpreferences.edit();
     editor.putString("languages",json);
     editor.commit();
+  }
+
+  public void onButtonShowPopupWindowClickEdit(View view, final int buttonID) {
+    // inflate the layout of the popup window
+    LayoutInflater inflater = (LayoutInflater)
+            getSystemService(LAYOUT_INFLATER_SERVICE);
+    final View popupView = inflater.inflate(R.layout.popup_edit, null);
+
+    // create the popup window
+    int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+    int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+    boolean focusable = true; // lets taps outside the popup also dismiss it
+    final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+    final TextView tvEdit = (TextView) popupView.findViewById(R.id.fieldToEdit);
+    tvEdit.setText(languages.get(buttonID));
+
+    // show the popup window
+    // which view you pass in doesn't matter, it is only used for the window tolken
+    popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+    Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
+    Button afirmarEdit = (Button) popupView.findViewById(R.id.afirmar);
+    afirmarEdit.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v){
+        String nuevaLengua = tvEdit.getText().toString();
+        addLanguage(nuevaLengua);
+        // delete old word
+        deleteLanguage(languages.get(buttonID));
+        addLanguageToSharedPreferences(languages);
+
+        // delete all the lists that are associated with that language
+
+        // delete all the words that are connected with each list
+
+        popupWindow.dismiss();
+        // restart this screen
+        Intent i = new Intent(getBaseContext(), MisPalabras.class);
+        startActivity(i);
+      }
+    });
+
+    final Button deleteLanguage = (Button) popupView.findViewById(R.id.borrar);
+    deleteLanguage.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        deleteLanguage(languages.get(buttonID));
+        addLanguageToSharedPreferences(languages);
+        popupWindow.dismiss();
+        // restart this screen
+        Intent i = new Intent(getBaseContext(), MisPalabras.class);
+        startActivity(i);
+      }
+    });
+    cancelPopup.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        popupWindow.dismiss();
+      }
+    });
+    Button nextScreen = (Button) popupView.findViewById(R.id.continuar);
+    nextScreen.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Log.i("StartIntent",languages.get(buttonID));
+        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
+        Log.i("mispalabras",Integer.toString(buttonID));
+        i.putExtra("language", languages.get(buttonID));
+        startActivity(i);
+      }
+    });
   }
 }

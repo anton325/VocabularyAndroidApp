@@ -189,6 +189,7 @@ public class Aprender extends AppCompatActivity {
             learnt.clear();
             wordsLearnt = 0;
         }
+
         int n = randomInstance.nextInt(accumulatedWords.size());
         for(int i = 0; i < 100; i++) {
             if(!learnt.contains(n)) {

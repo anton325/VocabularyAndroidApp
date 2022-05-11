@@ -67,11 +67,8 @@ public class ListsInLanguage extends AppCompatActivity {
     View.OnClickListener btnclick = new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Log.i("StartIntent","test");
-        Log.i("StartIntent",listsOfLanguage.get(view.getId()));
-        Intent i = new Intent(getBaseContext(), Palabras.class);
-        i.putExtra("list", listsOfLanguage.get(view.getId()));
-        startActivity(i);
+        onButtonShowPopupWindowClickEdit(view, view.getId());
+
       }
     };
     // and save them in array
@@ -191,10 +188,88 @@ public class ListsInLanguage extends AppCompatActivity {
   public void addList(String list){
     listsOfLanguage.add(list);
   }
+  public void deleteList(String list) {
+    listsOfLanguage.remove(list);
+  }
   public void addListToSharedPreferences(ArrayList<String> listsOfLanguage){
     String json = gson.toJson(listsOfLanguage);
     SharedPreferences.Editor editor = sharedpreferences.edit();
     editor.putString(selectedLanguage,json);
     editor.commit();
   }
+
+  public void onButtonShowPopupWindowClickEdit(View view, final int buttonID) {
+    // inflate the layout of the popup window
+    LayoutInflater inflater = (LayoutInflater)
+            getSystemService(LAYOUT_INFLATER_SERVICE);
+    final View popupView = inflater.inflate(R.layout.popup_edit, null);
+
+    // create the popup window
+    int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+    int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+    boolean focusable = true; // lets taps outside the popup also dismiss it
+    final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+    final TextView tvEdit = (TextView) popupView.findViewById(R.id.fieldToEdit);
+    tvEdit.setText(listsOfLanguage.get(buttonID));
+
+    // show the popup window
+    // which view you pass in doesn't matter, it is only used for the window tolken
+    popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+    Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
+    Button afirmarEdit = (Button) popupView.findViewById(R.id.afirmar);
+    afirmarEdit.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v){
+        String nuevaLengua = tvEdit.getText().toString();
+        addList(nuevaLengua);
+        // delete old word
+        deleteList(listsOfLanguage.get(buttonID));
+        addListToSharedPreferences(listsOfLanguage);
+
+        // delete all the words that are connected with this list
+
+        popupWindow.dismiss();
+        // restart this screen
+        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
+        i.putExtra("language",selectedLanguage);
+        startActivity(i);
+      }
+    });
+
+    final Button deleteListButton = (Button) popupView.findViewById(R.id.borrar);
+    deleteListButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        deleteList(listsOfLanguage.get(buttonID));
+        addListToSharedPreferences(listsOfLanguage);
+        popupWindow.dismiss();
+        // restart this screen
+        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
+        i.putExtra("language",selectedLanguage);
+        startActivity(i);
+      }
+    });
+    cancelPopup.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        popupWindow.dismiss();
+      }
+    });
+
+    Button nextScreen = (Button) popupView.findViewById(R.id.continuar);
+    nextScreen.setText("Abrir lista");
+    nextScreen.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Log.i("StartIntent",listsOfLanguage.get(buttonID));
+        Intent i = new Intent(getBaseContext(), Palabras.class);
+        Log.i("listsinlanguage",Integer.toString(buttonID));
+        i.putExtra("list", listsOfLanguage.get(buttonID));
+        startActivity(i);
+      }
+    });
+  }
+
 }
