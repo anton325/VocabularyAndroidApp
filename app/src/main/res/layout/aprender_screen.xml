@@ -35,22 +35,6 @@
             android:id="@+id/cambiaDirrecion"/>
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="false"
-            android:maxLines="3"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_weight="1"
-            android:background="#ff0000"
-            android:text="Cambia Direccion"
-            android:textColor="#ffffff"
-            android:gravity="center"
-            android:id="@+id/cambiaDireccionText"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="20sp"/>
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Que significa"

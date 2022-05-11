@@ -40,9 +40,12 @@ public class Aprender extends AppCompatActivity {
     private TextView wordTV;
     private TextView solutionTV;
     private Button solutionButton;
+    private Button changeDirection;
     private Random randomInstance;
     private ArrayList<Integer> learnt;
     private int learnOrSolve;
+    private int direction;
+    private int wordsLearnt;
 
 
     @Override
@@ -96,6 +99,22 @@ public class Aprender extends AppCompatActivity {
         solutionTV.setText(translations.get(accumulatedWords.get(start)));
         solutionTV.setVisibility(View.INVISIBLE);
 
+        changeDirection = (Button) findViewById(R.id.cambiaDirrecion);
+        changeDirection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (direction == 1) {
+                    direction = 0;
+                }
+                else {
+                    direction = 1;
+                }
+                String word = wordTV.getText().toString();
+                wordTV.setText(solutionTV.getText().toString());
+                solutionTV.setText(word);
+            }
+        });
+
         learnOrSolve = 0;
         solutionButton = (Button) findViewById(R.id.buttonSolution);
         solutionButton.setText("Muestra soluccion");
@@ -106,12 +125,13 @@ public class Aprender extends AppCompatActivity {
                     solutionTV.setVisibility(View.VISIBLE);
                     solutionButton.setText("Contiuna");
                     learnOrSolve = 1;
+                    wordsLearnt++;
                 }
                 else {
                     learnOrSolve = 0;
                     solutionButton.setText("Muestra soluccion");
                     solutionTV.setVisibility(View.INVISIBLE);
-                    loadNextWordsOnScreen(0);
+                    loadNextWordsOnScreen(direction);
                 }
 
             }
@@ -165,9 +185,14 @@ public class Aprender extends AppCompatActivity {
     }
 
     private int nextWordIndex() {
-        int n = randomInstance.nextInt(accumulatedWords.size());;
+        if(wordsLearnt > 0.75 * learnt.size()) {
+            learnt.clear();
+            wordsLearnt = 0;
+        }
+        int n = randomInstance.nextInt(accumulatedWords.size());
         for(int i = 0; i < 100; i++) {
             if(!learnt.contains(n)) {
+                learnt.add(n);
                 return n;
             }
             n = randomInstance.nextInt(accumulatedWords.size());
@@ -180,6 +205,11 @@ public class Aprender extends AppCompatActivity {
         if (direction == 0) {
             wordTV.setText(accumulatedWords.get(index));
             solutionTV.setText(translations.get(accumulatedWords.get(index)));
+        }
+        else {
+            //now do it the other way around
+            wordTV.setText(translations.get(accumulatedWords.get(index)));
+            solutionTV.setText(accumulatedWords.get(index));
         }
     }
 }
