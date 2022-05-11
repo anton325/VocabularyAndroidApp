@@ -150,6 +150,7 @@ public class MisPalabras extends AppCompatActivity {
     popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
     Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
+
     Button addLengua = (Button) popupView.findViewById(R.id.afirmarlengua);
     addLengua.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -164,6 +165,7 @@ public class MisPalabras extends AppCompatActivity {
         startActivity(i);
       }
     });
+
     cancelPopup.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -212,25 +214,26 @@ public class MisPalabras extends AppCompatActivity {
 
     Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
     Button afirmarEdit = (Button) popupView.findViewById(R.id.afirmar);
-    afirmarEdit.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v){
-        String nuevaLengua = tvEdit.getText().toString();
-        addLanguage(nuevaLengua);
-        // delete old word
-        deleteLanguage(languages.get(buttonID));
-        addLanguageToSharedPreferences(languages);
-
-        // delete all the lists that are associated with that language
-
-        // delete all the words that are connected with each list
-
-        popupWindow.dismiss();
-        // restart this screen
-        Intent i = new Intent(getBaseContext(), MisPalabras.class);
-        startActivity(i);
-      }
-    });
+    afirmarEdit.setVisibility(View.INVISIBLE);
+//    afirmarEdit.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v){
+//        String nuevaLengua = tvEdit.getText().toString();
+//        addLanguage(nuevaLengua);
+//        // delete old word
+//        deleteLanguage(languages.get(buttonID));
+//        addLanguageToSharedPreferences(languages);
+//
+//        // delete all the lists that are associated with that language
+//
+//        // delete all the words that are connected with each list
+//
+//        popupWindow.dismiss();
+//        // restart this screen
+//        Intent i = new Intent(getBaseContext(), MisPalabras.class);
+//        startActivity(i);
+//      }
+//    });
 
     final Button deleteLanguage = (Button) popupView.findViewById(R.id.borrar);
     deleteLanguage.setOnClickListener(new View.OnClickListener() {

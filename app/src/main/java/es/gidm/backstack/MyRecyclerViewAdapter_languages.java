@@ -40,13 +40,14 @@ public class MyRecyclerViewAdapter_languages extends RecyclerView.Adapter<MyRecy
         holder.listName.setText(listName);
         if(colors.get(lists.get(position)) == 1) {
             // color background
-            holder.listName.setBackgroundColor(0xfff00000);
+            holder.listName.setBackgroundColor(0xfff00000);  //0x7a7a7a grey
         }
         else {
             // dont color background
-            holder.listName.setBackgroundColor(0xaea12aa2);
+            holder.listName.setBackgroundColor(0xaea12aa2); // 0xffffff white
         }
     }
+
 
     // total number of rows
     @Override

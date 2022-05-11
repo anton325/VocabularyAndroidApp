@@ -178,7 +178,7 @@ public class Aprender extends AppCompatActivity {
     }
 
     private int nextWordIndex() {
-        if(wordsLearnt > 0.75 * learnt.size()) {
+        if(wordsLearnt > 0.8 * learnt.size()) {
             learnt.clear();
             wordsLearnt = 0;
         }

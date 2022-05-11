@@ -225,24 +225,25 @@ public class ListsInLanguage extends AppCompatActivity {
 
     Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
     Button afirmarEdit = (Button) popupView.findViewById(R.id.afirmar);
-    afirmarEdit.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v){
-        String nuevaLengua = tvEdit.getText().toString();
-        addList(nuevaLengua);
-        // delete old word
-        deleteList(listsOfLanguage.get(buttonID));
-        addListToSharedPreferences(listsOfLanguage);
-
-        // delete all the words that are connected with this list
-
-        popupWindow.dismiss();
-        // restart this screen
-        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
-        i.putExtra("language",selectedLanguage);
-        startActivity(i);
-      }
-    });
+    afirmarEdit.setVisibility(View.INVISIBLE);
+//    afirmarEdit.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v){
+//        String nuevaLengua = tvEdit.getText().toString();
+//        addList(nuevaLengua);
+//        // delete old word
+//        deleteList(listsOfLanguage.get(buttonID));
+//        addListToSharedPreferences(listsOfLanguage);
+//
+//        // delete all the words that are connected with this list
+//
+//        popupWindow.dismiss();
+//        // restart this screen
+//        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
+//        i.putExtra("language",selectedLanguage);
+//        startActivity(i);
+//      }
+//    });
 
     final Button deleteListButton = (Button) popupView.findViewById(R.id.borrar);
     deleteListButton.setOnClickListener(new View.OnClickListener() {
