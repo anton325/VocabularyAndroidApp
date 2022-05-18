@@ -67,50 +67,88 @@ public class Buscar extends AppCompatActivity {
             languages = gson.fromJson(json,type);
         }
 
-        // for all languages get all the lists
-        ArrayList<String> listsOfLanguages = new ArrayList<String>();
+        // for all languages get all the lists and read all the words out of the list to add
+        ArrayList<String> listsOfLanguages;
+        ArrayList<String> wordsInList;
+        ArrayList<String> wordsShownInSearch = new ArrayList<String>(); // accumulates all words
+        String nameTranslationList;
+        HashMap<String,String> allTranslations;
+        final HashMap<String,String> wordsTranslationSearch = new HashMap<String,String>();
+
         for(String l : languages) {
             json = sharedpreferences.getString(l,"");
+            listsOfLanguages = new ArrayList<String>();
             if (!json.isEmpty()) {
                 Type type = new TypeToken<ArrayList<String>>(){}.getType();
                 listsOfLanguages.addAll((Collection<? extends String>) gson.fromJson(json,type));
             }
-        }
-        String nameTranslationList;
-        ArrayList<String> allWords = new ArrayList<String>();
-        final HashMap<String,String> allTranslations = new HashMap<String,String>();
-        // each word in each list needs to be added to our accumluated list
-        // and each translation as well
-        for(String list : listsOfLanguages) {
-            json = sharedpreferences.getString(list,"");
-            if (!json.isEmpty()) {
-                Type type = new TypeToken<ArrayList<String>>() {
-                }.getType();
-                allWords.addAll((Collection<? extends String>) gson.fromJson(json, type));
-            }
-            nameTranslationList = list+"translation";
-            json = sharedpreferences.getString(nameTranslationList,"");
-            if (!json.isEmpty()) {
-                Type type = new TypeToken<HashMap<String,String>>(){}.getType();
-                allTranslations.putAll((Map<? extends String, ? extends String>) gson.fromJson(json,type));
+            for (String list : listsOfLanguages) {
+                json = sharedpreferences.getString(list,"");
+                wordsInList = new ArrayList<String>();
+                if (!json.isEmpty()) {
+                    Type type = new TypeToken<ArrayList<String>>() {
+                    }.getType();
+                    wordsInList.addAll((Collection<? extends String>) gson.fromJson(json,type));
+                    for(String w : wordsInList) {
+                        Log.i("b2",w);
+                    }
+                }
+                nameTranslationList = list+"translation";
+                json = sharedpreferences.getString(nameTranslationList,"");
+                allTranslations = new HashMap<String,String>();
+                if (!json.isEmpty()) {
+                    Type type = new TypeToken<HashMap<String,String>>(){}.getType();
+                    allTranslations.putAll((Map<? extends String, ? extends String>) gson.fromJson(json,type));
+                }
+                for (String word : wordsInList) {
+                    String newWord = word + " - " + l;
+                    String itsTranslation = allTranslations.get(word);
+                    Log.i("b",newWord);
+                    wordsShownInSearch.add(newWord);
+                    wordsTranslationSearch.put(newWord,itsTranslation);
+
+                    // we also want to be able to search in the other direction:
+                    String newTranslation = itsTranslation + " - " + l;
+                    wordsShownInSearch.add(newTranslation);
+                    wordsTranslationSearch.put(newTranslation,word);
+                }
             }
         }
 
-        // now we have all the words and all the word + translation pairs
-        // i also want to be able to search through the translations
-        ArrayList<String> additionalWords = new ArrayList<String>();
-        for(String word : allWords) {
-            String translation = allTranslations.get(word);
-            allTranslations.put(translation,word);
-            additionalWords.add(translation);
-        }
-        allWords.addAll(additionalWords);
+
+//        ArrayList<String> allWords = new ArrayList<String>();
+//        // each word in each list needs to be added to our accumluated list
+//        // and each translation as well
+//        for(String list : listsOfLanguages) {
+//            json = sharedpreferences.getString(list,"");
+//            if (!json.isEmpty()) {
+//                Type type = new TypeToken<ArrayList<String>>() {
+//                }.getType();
+//                allWords.addAll((Collection<? extends String>) gson.fromJson(json, type));
+//            }
+//            nameTranslationList = list+"translation";
+//            json = sharedpreferences.getString(nameTranslationList,"");
+//            if (!json.isEmpty()) {
+//                Type type = new TypeToken<HashMap<String,String>>(){}.getType();
+//                allTranslations.putAll((Map<? extends String, ? extends String>) gson.fromJson(json,type));
+//            }
+//        }
+//
+//        // now we have all the words and all the word + translation pairs
+//        // i also want to be able to search through the translations
+//        ArrayList<String> additionalWords = new ArrayList<String>();
+//        for(String word : allWords) {
+//            String translation = allTranslations.get(word);
+//            allTranslations.put(translation,word);
+//            additionalWords.add(translation);
+//        }
+//        allWords.addAll(additionalWords);
 
 
 
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.buscarTextView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.list_item, allWords);
+                R.layout.list_item, wordsShownInSearch);
         autoCompleteTextView.setAdapter(adapter);
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -119,13 +157,15 @@ public class Buscar extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "ausgewähltes wort " +
                         adapterView.getAdapter().getItem(i), Toast.LENGTH_SHORT).show();
                 String word = (String) adapterView.getAdapter().getItem(i);
-                String translation = allTranslations.get(word);
+                // edit the word a little bit, right now it's in the format: "word - language"
+                String wordClean = word.split("-")[0];
+                String translation = wordsTranslationSearch.get(word);
 
                 // hide keyboard
                 InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 //Hide:
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-                onButtonShowPopupWindowClick(view, word, translation);
+                onButtonShowPopupWindowClick(view, wordClean, translation);
             }
         });
 
