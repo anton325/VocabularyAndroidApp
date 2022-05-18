@@ -1,5 +1,6 @@
 package es.gidm.backstack;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,8 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -190,8 +193,38 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     popupText.setText("Entra la traduccion nueva que quieres añadir.");
     final EditText textfieldWord = (EditText) popupView.findViewById(R.id.word);
     textfieldWord.setText(key);
+    textfieldWord.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+      @Override
+      public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+        Log.i("mis palabras","clicked");
+        if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+          Log.i("mis palabras","if");
+          // hide keyboard
+          InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+          //Hide:
+          imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+          return true;
+        }
+        return false;
+      }
+    });
     final EditText textfieldTranslation = (EditText) popupView.findViewById(R.id.translation);
     textfieldTranslation.setText(value);
+    textfieldTranslation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+      @Override
+      public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+        Log.i("mis palabras","clicked");
+        if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+          Log.i("mis palabras","if");
+          // hide keyboard
+          InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+          //Hide:
+          imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+          return true;
+        }
+        return false;
+      }
+    });
 
     Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
     Button addList = (Button) popupView.findViewById(R.id.afirmarPalabra);
@@ -291,13 +324,11 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     editor.commit();
   }
 
-  public void addHashmapToSharedPreferences(HashMap<String,String> hm){
+  public void addHashmapToSharedPreferences(HashMap<String,String> hm) {
     String json = gson.toJson(hm);
     SharedPreferences.Editor editor = sharedpreferences.edit();
-    editor.putString(nameTranslationList,json);
+    editor.putString(nameTranslationList, json);
     editor.commit();
   }
-
-
 
 }

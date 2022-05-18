@@ -1,5 +1,6 @@
 package es.gidm.backstack;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.support.v7.widget.Toolbar;
@@ -155,13 +158,30 @@ public class MisPalabras extends AppCompatActivity {
     // which view you pass in doesn't matter, it is only used for the window tolken
     popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
+    final EditText textfieldNuevaLengua = (EditText) popupView.findViewById(R.id.textoLengua);
+    textfieldNuevaLengua.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+      @Override
+      public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+        Log.i("mis palabras","clicked");
+        if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+          Log.i("mis palabras","if");
+          // hide keyboard
+          InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+          //Hide:
+          imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+          return true;
+        }
+        return false;
+      }
+    });
+
     Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
 
     Button addLengua = (Button) popupView.findViewById(R.id.afirmarlengua);
+
     addLengua.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v){
-        EditText textfieldNuevaLengua = (EditText) popupView.findViewById(R.id.textoLengua);
         String nuevaLengua = textfieldNuevaLengua.getText().toString();
         addLanguage(nuevaLengua);
         addLanguageToSharedPreferences(languages);
@@ -213,6 +233,19 @@ public class MisPalabras extends AppCompatActivity {
 
     final TextView tvEdit = (TextView) popupView.findViewById(R.id.fieldToEdit);
     tvEdit.setText(languages.get(buttonID));
+    tvEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+      @Override
+      public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+        if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+          // hide keyboard
+          InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+          //Hide:
+          imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+          return true;
+        }
+        return false;
+      }
+    });
 
     // show the popup window
     // which view you pass in doesn't matter, it is only used for the window tolken
