@@ -3,6 +3,7 @@ package es.gidm.backstack;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -122,7 +124,9 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
 
 
 
-
+        // color where we are
+        RadioButton currentScreenButton =(RadioButton) findViewById(R.id.aprender);
+        currentScreenButton.setTextColor(Color.RED);
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {

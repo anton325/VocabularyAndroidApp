@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -117,7 +118,9 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     });
 
 
-
+    // color where we are
+    RadioButton currentScreenButton =(RadioButton) findViewById(R.id.palabras);
+    currentScreenButton.setTextColor(Color.RED);
     radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
     radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
     {

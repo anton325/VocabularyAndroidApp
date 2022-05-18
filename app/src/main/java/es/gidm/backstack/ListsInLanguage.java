@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -104,7 +105,9 @@ public class ListsInLanguage extends AppCompatActivity {
     });
 
 
-
+    // color where we are
+    RadioButton currentScreenButton =(RadioButton) findViewById(R.id.palabras);
+    currentScreenButton.setTextColor(Color.RED);
     radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
     radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
     {

@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
@@ -128,7 +129,9 @@ public class Buscar extends AppCompatActivity {
             }
         });
 
-
+        // color where we are
+        RadioButton currentScreenButton =(RadioButton) findViewById(R.id.buscar);
+        currentScreenButton.setTextColor(Color.RED);
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {

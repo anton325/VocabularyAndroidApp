@@ -1,12 +1,14 @@
 package es.gidm.backstack;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -140,6 +142,9 @@ public class Aprender extends AppCompatActivity {
 
 
 
+        // color where we are
+        RadioButton currentScreenButton =(RadioButton) findViewById(R.id.aprender);
+        currentScreenButton.setTextColor(Color.RED);
 
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
