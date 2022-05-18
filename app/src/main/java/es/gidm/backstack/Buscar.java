@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -249,8 +250,40 @@ public class Buscar extends AppCompatActivity {
         popupText.setText("El resultado de la busqueda:");
         final EditText textfieldWord = (EditText) popupView.findViewById(R.id.word);
         textfieldWord.setText(word);
+
+        textfieldWord.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+                Log.i("mis palabras","clicked");
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    Log.i("mis palabras","if");
+                    // hide keyboard
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    //Hide:
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    return true;
+                }
+                return false;
+            }
+        });
+
         final EditText textfieldTranslation = (EditText) popupView.findViewById(R.id.translation);
         textfieldTranslation.setText(translation);
+        textfieldTranslation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+                Log.i("mis palabras","clicked");
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    Log.i("mis palabras","if");
+                    // hide keyboard
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    //Hide:
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         Button cancelPopup = (Button) popupView.findViewById(R.id.cancellengua);
         Button addList = (Button) popupView.findViewById(R.id.afirmarPalabra);
