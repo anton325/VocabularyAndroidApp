@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.118" />
         <entry key="app/src/main/res/layout/ListsInLanguageStyle.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/MisPalabras.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/activity_actividad3.xml" value="0.10677083333333333" />
@@ -17,6 +19,7 @@
         <entry key="app/src/main/res/layout/list_item.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/listsinlanguage_style.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/mis_palabras.xml" value="0.2375" />
+        <entry key="app/src/main/res/layout/notification_screen_style.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/palabras_style.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/popup_edit.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/popup_lengua.xml" value="0.10677083333333333" />

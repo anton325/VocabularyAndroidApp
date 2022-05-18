@@ -54,6 +54,12 @@
         android:label="Buscar_screen"
         android:theme="@style/AppTheme.NoActionBar" >
     </activity>
+    <receiver android:name=".MyNotificationPublisher" />
+    <activity
+        android:name=".Notification_Screen"
+        android:label="notifiaction_screen"
+        android:theme="@style/AppTheme.NoActionBar">
+    </activity>
   </application>
 
 </manifest>

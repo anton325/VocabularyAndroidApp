@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="10dp"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/texto_notification"
+        android:text="Todavía te acuerdas?"
+        />
+
+    <LinearLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footer"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:background="#ff0000"
+            android:text="Left!"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:id="@+id/left"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:background="#ff0000"
+            android:text="right!"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:id="@+id/right"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20sp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:id="@+id/footer"
+        android:layout_alignParentBottom="true">
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:text="Home"
+                android:layout_weight="1"
+                android:button="@null"
+                android:padding="2dp"
+                android:checked="false"
+                android:textSize="12sp"
+                android:id="@+id/home"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:text="Mis Palabras"
+                android:layout_weight="1"
+                android:button="@null"
+                android:padding="2dp"
+                android:checked="false"
+                android:textSize="12sp"
+                android:id="@+id/palabras"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:checked="false"
+                android:textSize="12sp"
+                android:id="@+id/aprender"
+                android:text="Aprender"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:checked="false"
+                android:textSize="12sp"
+                android:id="@+id/buscar"
+                android:text="Buscar"/>
+        </RadioGroup>
+    </LinearLayout>
+
+</RelativeLayout>
