@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import java.io.File;
 import java.util.Random;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -33,6 +35,7 @@ import java.util.Map;
 
 public class Aprender extends AppCompatActivity {
 
+    PlayButton myPlayButton;
 
     RadioGroup radioGroup1;
     private Gson gson;
@@ -139,6 +142,19 @@ public class Aprender extends AppCompatActivity {
             }
         });
 
+        String leftPartPath = accumulatedWords.get(start);
+        String rightPartPath = translations.get(accumulatedWords.get(start));
+        String path = getExternalCacheDir().getAbsolutePath() + "/" +leftPartPath + rightPartPath+".3gp";
+        File mediaFile = new File(path);
+        if(mediaFile.exists()){
+            myPlayButton = new PlayButton(this,path);
+            LinearLayout ll = (LinearLayout) findViewById(R.id.buttonLayout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            ll.addView(myPlayButton, lp);
+        }
+
+
+
 
 
 
@@ -215,6 +231,19 @@ public class Aprender extends AppCompatActivity {
             //now do it the other way around
             wordTV.setText(translations.get(accumulatedWords.get(index)));
             solutionTV.setText(accumulatedWords.get(index));
+        }
+        String leftPartPath = accumulatedWords.get(index);
+        String rightPartPath = translations.get(accumulatedWords.get(index));
+        String path = getExternalCacheDir().getAbsolutePath() + "/" +leftPartPath + rightPartPath+".3gp";
+        File mediaFile = new File(path);
+        if (myPlayButton != null) {
+            myPlayButton.setVisibility(View.GONE);
+        }
+        if(mediaFile.exists()){
+            myPlayButton = new PlayButton(this,path);
+            LinearLayout ll = (LinearLayout) findViewById(R.id.buttonLayout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            ll.addView(myPlayButton, lp);
         }
     }
 }
