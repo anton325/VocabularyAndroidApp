@@ -305,6 +305,18 @@ public class Buscar extends AppCompatActivity {
         });
         Button deleteWord = (Button) popupView.findViewById(R.id.borrarPalabra);
         deleteWord.setVisibility(View.INVISIBLE);
+
+        // load and show the buttons
+        // word has a space at the end - get rid of
+        word = word.substring(0,word.length()-1);
+        String path = getExternalCacheDir().getAbsolutePath() + "/" +word + translation+".3gp";
+        Log.i("buscar path",path);
+        PlayButton myPlayButton = new PlayButton(this,path);
+        RecordButton myRecordButton = new RecordButton(this,path);
+        LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        ll.addView(myRecordButton,lp);
+        ll.addView(myPlayButton, lp);
     }
 
     public void scheduleNotification(Context context, long delay, int notificationId) {//delay is after how much time(in millis) from current time you want to schedule the notification

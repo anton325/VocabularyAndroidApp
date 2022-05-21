@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -172,6 +173,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
 
   public void onButtonShowPopupWindowClick(View view, final String key, final String value, Boolean existing, final int position, final int editing) {
     Log.i("palabras","popup");
+    String path="";
 
     // inflate the layout of the popup window
     LayoutInflater inflater = (LayoutInflater)
@@ -268,6 +270,33 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
           myllm.scrollToPositionWithOffset(keys.size()-1, 0);
         }
 
+        if (editing == 1) {
+          // were editing the word, so the recording has already existed in memory
+          Log.i("Palabras","wort-aufnahme existiert");
+          String path_toexisting = getExternalCacheDir().getAbsolutePath();
+          path_toexisting += "/"+key+value+".3gp";
+          Log.i("aufnahme exisitert palabras path existing",path_toexisting);
+          String pathNew = getExternalCacheDir().getAbsolutePath() + "/" +word + translation+".3gp";
+          Log.i("existing: palabras path saved to",pathNew);
+          File from = new File(path_toexisting);
+          File to = new File(pathNew);
+          if(from.exists()){
+            from.renameTo(to);
+          }
+        }
+        else {
+          // new recording, rename file accordingly
+          String path_toexisting = getExternalCacheDir().getAbsolutePath();
+          path_toexisting += "/audiorecordtest.3gp";
+          Log.i("palabras path existing",path_toexisting);
+          String pathNew = getExternalCacheDir().getAbsolutePath() + "/" +word + translation+".3gp";
+          Log.i("palabras path saved to",pathNew);
+          File from = new File(path_toexisting);
+          File to = new File(pathNew);
+          if(from.exists()){
+              from.renameTo(to);
+          }
+        }
         // scroll to that item
 
         // restart this screen
@@ -284,7 +313,6 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
 //
 //        addToList(keys,word);
 //        addToHashmap(wordsAndTranslations,word,translation);
-
         addListToSharedPreferences(keys);
         addHashmapToSharedPreferences(wordsAndTranslations);
         popupWindow.dismiss();
@@ -310,17 +338,33 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
           adapter.notifyItemRemoved(position);
         }
       });
+
+      // if the word already exists, there might be an audio recording we have to load
+      String word = textfieldWord.getText().toString();
+      String translation = textfieldTranslation.getText().toString();
+      path = getExternalCacheDir().getAbsolutePath() + "/" +word + translation+".3gp";
+      PlayButton myPlayButton = new PlayButton(this,path);
+      RecordButton myRecordButton = new RecordButton(this,path);
+      LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
+      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+      ll.addView(myRecordButton,lp);
+      ll.addView(myPlayButton, lp);
+
+    }
+    else {
+      // word doesnt exist, so create new recording
+      // setup record and play buttons
+      path = getExternalCacheDir().getAbsolutePath();
+      path += "/audiorecordtest.3gp";
+      PlayButton myPlayButton = new PlayButton(this,path);
+      RecordButton myRecordButton = new RecordButton(this,path);
+      LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
+      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+      ll.addView(myRecordButton,lp);
+      ll.addView(myPlayButton, lp);
     }
 
-    // setup record and play buttons
-    String fileName = getExternalCacheDir().getAbsolutePath();
-    fileName += "/audiorecordtest.3gp";
-    PlayButton myPlayButton = new PlayButton(this,fileName);
-    RecordButton myRecordButton = new RecordButton(this,fileName);
-    LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    ll.addView(myRecordButton,lp);
-    ll.addView(myPlayButton, lp);
+
   }
 
   public void addToList(ArrayList<String> list, String key){
