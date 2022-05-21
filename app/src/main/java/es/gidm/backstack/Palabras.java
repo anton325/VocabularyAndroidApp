@@ -311,6 +311,16 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
         }
       });
     }
+
+    // setup record and play buttons
+    String fileName = getExternalCacheDir().getAbsolutePath();
+    fileName += "/audiorecordtest.3gp";
+    PlayButton myPlayButton = new PlayButton(this,fileName);
+    RecordButton myRecordButton = new RecordButton(this,fileName);
+    LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    ll.addView(myRecordButton,lp);
+    ll.addView(myPlayButton, lp);
   }
 
   public void addToList(ArrayList<String> list, String key){
