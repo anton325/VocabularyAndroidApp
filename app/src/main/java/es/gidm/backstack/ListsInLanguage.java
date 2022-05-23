@@ -101,7 +101,7 @@ public class ListsInLanguage extends AppCompatActivity {
     addList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
         onButtonShowPopupWindowClick(view);
       }
     });

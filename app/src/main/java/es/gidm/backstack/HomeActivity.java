@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         toMisPalabras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"go to misPalabras",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"go to misPalabras",Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getBaseContext(),MisPalabras.class);
                 startActivity(i);
             }
@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         toAprender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "to to aprender", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "to to aprender", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getBaseContext(), AprenderLanguages.class);
                 startActivity(i);
             }
@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
         toBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "to buscar", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "to buscar", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getBaseContext(), Buscar.class);
                 startActivity(i);
             }

@@ -114,7 +114,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     addList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
         onButtonShowPopupWindowClick(view,"","",Boolean.FALSE,0,0);
       }
     });

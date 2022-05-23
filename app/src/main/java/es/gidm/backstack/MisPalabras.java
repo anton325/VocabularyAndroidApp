@@ -65,7 +65,7 @@ public class MisPalabras extends AppCompatActivity {
     View.OnClickListener btnclick = new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Toast.makeText(getApplicationContext(), "show popup_edit", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "show popup_edit", Toast.LENGTH_SHORT).show();
         onButtonShowPopupWindowClickEdit(view, view.getId());
       }
     };
@@ -93,7 +93,7 @@ public class MisPalabras extends AppCompatActivity {
     addLanguage.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),"show popup",Toast.LENGTH_SHORT).show();
         onButtonShowPopupWindowClick(view);
       }
     });

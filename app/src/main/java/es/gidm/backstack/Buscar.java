@@ -163,8 +163,8 @@ public class Buscar extends AppCompatActivity {
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), "ausgewähltes wort " +
-                        adapterView.getAdapter().getItem(i), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "ausgewähltes wort " +
+//                        adapterView.getAdapter().getItem(i), Toast.LENGTH_SHORT).show();
                 String word = (String) adapterView.getAdapter().getItem(i);
                 // edit the word a little bit, right now it's in the format: "word - language"
                 String wordClean = word.split("-")[0];
