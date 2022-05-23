@@ -322,10 +322,15 @@ public class Buscar extends AppCompatActivity {
         Log.i("buscar path",path);
         PlayButton myPlayButton = new PlayButton(this,path);
         myRecordButton = new RecordButton(this,path,popupWindow);
+        myRecordButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
+        myPlayButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
         LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(20,0,10,0);
         ll.addView(myRecordButton,lp);
-        ll.addView(myPlayButton, lp);
+        LinearLayout.LayoutParams lpp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lpp.setMargins(10,0,20,0);
+        ll.addView(myPlayButton, lpp);
     }
 
     public void scheduleNotification(Context context, long delay, int notificationId) {//delay is after how much time(in millis) from current time you want to schedule the notification

@@ -148,6 +148,7 @@ public class Aprender extends AppCompatActivity {
         File mediaFile = new File(path);
         if(mediaFile.exists()){
             myPlayButton = new PlayButton(this,path);
+            myPlayButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
             LinearLayout ll = (LinearLayout) findViewById(R.id.buttonLayout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.addView(myPlayButton, lp);
@@ -241,6 +242,7 @@ public class Aprender extends AppCompatActivity {
         }
         if(mediaFile.exists()){
             myPlayButton = new PlayButton(this,path);
+            myPlayButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
             LinearLayout ll = (LinearLayout) findViewById(R.id.buttonLayout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.addView(myPlayButton, lp);

@@ -4,7 +4,7 @@
     android:layout_width="100dp"
     android:layout_height="100dp"
     android:orientation="vertical"
-    android:background="#62def8">
+    android:background="@drawable/border">
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,23 +29,35 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/cancellengua"
+            android:background="@drawable/custom_rectangle_buttons"
+            android:layout_marginLeft="20dp"
             android:text="Atras"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/afirmar"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/custom_rectangle_buttons"
             android:text="Afirmar"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/borrar"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_rectangle_buttons"
             android:text="Borrar"/>
     </LinearLayout>
     <Button
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:id="@+id/continuar"
+        android:background="@drawable/custom_rectangle_buttons"
         android:text="Abrir lengua"/>
 </LinearLayout>

@@ -100,14 +100,13 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
         myllm = new LinearLayoutManager(this);
         myllm.scrollToPositionWithOffset(scrollToPosition, 0);
         recyclerView.setLayoutManager(myllm);
-        adapter = new MyRecyclerViewAdapter_languages(this, listsOfLanguage,colorsOfLists);
+        adapter = new MyRecyclerViewAdapter_languages(this, listsOfLanguage,colorsOfLists,getApplicationContext());
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
 
 
         // setup learn buttons
-
         // learn by writing
         Button learnWriting = (Button) findViewById(R.id.learnWithWriting);
         learnWriting.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +144,6 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
 
             }
         });
-
 
 
         // color where we are

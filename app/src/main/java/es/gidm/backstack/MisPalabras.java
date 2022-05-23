@@ -80,9 +80,10 @@ public class MisPalabras extends AppCompatActivity {
       Log.i("list button: ",list);
       LinearLayout ll = (LinearLayout)findViewById(R.id.buttonLayout);
       LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+      lp.setMargins(75,20,75,0);
+      myButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
       ll.addView(myButton, lp);
       myButton.setId(buttonID);
-      myButton.setBackgroundResource(R.drawable.custom_rectangle);
       buttonID++;
       buttons.add(myButton);
     }
@@ -279,6 +280,7 @@ public class MisPalabras extends AppCompatActivity {
 //    });
 
     final Button deleteLanguage = (Button) popupView.findViewById(R.id.borrar);
+
     deleteLanguage.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {

@@ -355,10 +355,15 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       path = getExternalCacheDir().getAbsolutePath() + "/" +word + translation+".3gp";
       PlayButton myPlayButton = new PlayButton(this,path);
       myRecordButton = new RecordButton(this,path,popupWindow);
+      myRecordButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
+      myPlayButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
       LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
       LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+      lp.setMargins(20,0,10,0);
       ll.addView(myRecordButton,lp);
-      ll.addView(myPlayButton, lp);
+      LinearLayout.LayoutParams lpp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+      lpp.setMargins(10,0,20,0);
+      ll.addView(myPlayButton, lpp);
 
     }
     else {
@@ -367,11 +372,16 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       path = getExternalCacheDir().getAbsolutePath();
       path += "/audiorecordtest.3gp";
       PlayButton myPlayButton = new PlayButton(this,path);
-      RecordButton myRecordButton = new RecordButton(this,path,popupWindow);
+      myRecordButton = new RecordButton(this,path,popupWindow);
+      myRecordButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
+      myPlayButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
       LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
       LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+      lp.setMargins(20,0,10,0);
       ll.addView(myRecordButton,lp);
-      ll.addView(myPlayButton, lp);
+      LinearLayout.LayoutParams lpp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+      lpp.setMargins(10,0,20,0);
+      ll.addView(myPlayButton, lpp);
     }
 
 

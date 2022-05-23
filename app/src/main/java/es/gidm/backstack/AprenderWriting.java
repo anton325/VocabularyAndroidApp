@@ -1,5 +1,6 @@
 package es.gidm.backstack;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -100,6 +103,22 @@ public class AprenderWriting extends AppCompatActivity {
         solutionTV = (TextView) findViewById(R.id.palabraSoluccion);
         entryUserET = (EditText) findViewById(R.id.entryOfUser);
 
+        entryUserET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+                Log.i("aprender writing","clicked");
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    Log.i("aprender writing","if");
+                    // hide keyboard
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    //Hide:
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    return true;
+                }
+                return false;
+            }
+        });
+
         int start = nextWordIndex();
 
         wordTV.setText(accumulatedWords.get(start));
@@ -163,10 +182,12 @@ public class AprenderWriting extends AppCompatActivity {
         File mediaFile = new File(path);
         if(mediaFile.exists()){
             myPlayButton = new PlayButton(this,path);
+            myPlayButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
             LinearLayout ll = (LinearLayout) findViewById(R.id.buttonLayout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.addView(myPlayButton, lp);
         }
+
 
 
 
@@ -256,6 +277,7 @@ public class AprenderWriting extends AppCompatActivity {
         }
         if(mediaFile.exists()){
             myPlayButton = new PlayButton(this,path);
+            myPlayButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
             LinearLayout ll = (LinearLayout) findViewById(R.id.buttonLayout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.addView(myPlayButton, lp);
