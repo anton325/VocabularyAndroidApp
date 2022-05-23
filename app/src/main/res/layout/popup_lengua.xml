@@ -20,21 +20,28 @@
         android:id="@+id/textoLengua"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/addLanguageButtons">
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/cancellengua"
+            android:gravity="center"
             android:background="@drawable/custom_rectangle_buttons"
+            android:layout_marginLeft="20dp"
             android:text="Atras"/>
         <Button
             android:layout_width="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:id="@+id/afirmarlengua"
             android:background="@drawable/custom_rectangle_buttons"
             android:text="Anadir"/>

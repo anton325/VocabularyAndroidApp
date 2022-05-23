@@ -131,7 +131,7 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
 
         // learn by checking yourself
         Button addList = (Button) findViewById(R.id.anadirPalabra);
-        addList.setText("Fast Learning");
+        addList.setText("Aprender rapido");
         addList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
