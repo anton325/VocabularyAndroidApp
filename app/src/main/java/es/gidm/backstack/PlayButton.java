@@ -17,9 +17,9 @@ class PlayButton extends Button {
         public void onClick(View v) {
             onPlay(mStartPlaying);
             if (mStartPlaying) {
-                setText("Stop playing");
+                setText("Para");
             } else {
-                setText("Start playing");
+                setText("Reproducir");
             }
             mStartPlaying = !mStartPlaying;
         }
@@ -28,7 +28,7 @@ class PlayButton extends Button {
     public PlayButton(Context ctx, String filename) {
         super(ctx);
         this.fileName = filename;
-        setText("Start playing");
+        setText("Reproducir");
         setOnClickListener(clicker);
     }
     private void onPlay(boolean start) {

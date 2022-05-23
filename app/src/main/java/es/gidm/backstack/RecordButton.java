@@ -21,9 +21,9 @@ class RecordButton extends Button {
         public void onClick(View v) {
             onRecord(mStartRecording);
             if (mStartRecording) {
-                setText("Stop recording");
+                setText("Listo");
             } else {
-                setText("Start recording");
+                setText("Grabar");
             }
             mStartRecording = !mStartRecording;
         }
@@ -32,7 +32,7 @@ class RecordButton extends Button {
     public RecordButton(Context ctx, String fileName, PopupWindow pw) {
         super(ctx);
         this.fileName = fileName;
-        setText("Start recording");
+        setText("Grabar");
         setOnClickListener(clicker);
         this.pw = pw;
     }
