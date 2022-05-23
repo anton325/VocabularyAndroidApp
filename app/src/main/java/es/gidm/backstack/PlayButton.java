@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -46,6 +47,7 @@ class PlayButton extends Button {
             player.start();
         } catch (IOException e) {
             Log.e("Play Button", "prepare() failed");
+            Toast.makeText(getContext(),"Todavía no existe una grabación",Toast.LENGTH_SHORT);
         }
     }
 

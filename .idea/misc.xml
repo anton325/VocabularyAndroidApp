@@ -4,13 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/custom_rectangle.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/custom_rectangle_buttons.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.118" />
         <entry key="app/src/main/res/layout/ListsInLanguageStyle.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/MisPalabras.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/activity_actividad3.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.1" />
         <entry key="app/src/main/res/layout/aprender_languages.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/aprender_screen.xml" value="0.2375" />
+        <entry key="app/src/main/res/layout/aprender_select_lists.xml" value="0.10677083333333333" />
+        <entry key="app/src/main/res/layout/aprender_writing_screen.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/buscar_style.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/content_actividad1.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/content_actividad2.xml" value="0.10677083333333333" />

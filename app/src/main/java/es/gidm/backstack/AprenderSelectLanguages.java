@@ -55,7 +55,7 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("aprenderSelectLan","started aprender Lang selection");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.palabras_style);
+        setContentView(R.layout.aprender_select_lists);
 
         // assigning ID of the toolbar to a variable
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -106,19 +106,43 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
 
 
 
-        // setup add word button
+        // setup learn buttons
+
+        // learn by writing
+        Button learnWriting = (Button) findViewById(R.id.learnWithWriting);
+        learnWriting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // only if there was actually a list selected
+                if(!selectedLists.isEmpty()) {
+                    Intent i = new Intent(getBaseContext(), AprenderWriting.class);
+                    Bundle args = new Bundle();
+                    // tell the next class which lists have been selected
+                    args.putSerializable("ARRAYLIST", (Serializable) selectedLists);
+                    i.putExtra("BUNDLE", args);
+//                i.putExtra("selectedLang",selectedLanguage);
+                    startActivity(i);
+                }
+            }
+        });
+
+
+        // learn by checking yourself
         Button addList = (Button) findViewById(R.id.anadirPalabra);
-        addList.setText("Empezar aprender");
+        addList.setText("Fast Learning");
         addList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), Aprender.class);
-                Bundle args = new Bundle();
-                // tell the next class which lists have been selected
-                args.putSerializable("ARRAYLIST",(Serializable) selectedLists);
-                i.putExtra("BUNDLE",args);
+                if(!selectedLists.isEmpty()) {
+                    Intent i = new Intent(getBaseContext(), Aprender.class);
+                    Bundle args = new Bundle();
+                    // tell the next class which lists have been selected
+                    args.putSerializable("ARRAYLIST",(Serializable) selectedLists);
+                    i.putExtra("BUNDLE",args);
 //                i.putExtra("selectedLang",selectedLanguage);
-                startActivity(i);
+                    startActivity(i);
+                }
+
             }
         });
 

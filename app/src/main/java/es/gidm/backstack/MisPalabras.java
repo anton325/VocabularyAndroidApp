@@ -82,6 +82,7 @@ public class MisPalabras extends AppCompatActivity {
       LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
       ll.addView(myButton, lp);
       myButton.setId(buttonID);
+      myButton.setBackgroundResource(R.drawable.custom_rectangle);
       buttonID++;
       buttons.add(myButton);
     }

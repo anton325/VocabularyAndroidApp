@@ -46,6 +46,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
 
   private int scrollToPosition;
   private LinearLayoutManager myllm;
+  public RecordButton myRecordButton;
 
 
 
@@ -187,9 +188,9 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
     // make it close on touch outside of popup window
-    popupWindow.setOutsideTouchable(true);
-    popupWindow.setFocusable(true);
-    popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//    popupWindow.setOutsideTouchable(true);
+//    popupWindow.setFocusable(true);
+//    popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
     // show the popup window
     // which view you pass in doesn't matter, it is only used for the window tolken
@@ -316,6 +317,15 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
         addListToSharedPreferences(keys);
         addHashmapToSharedPreferences(wordsAndTranslations);
         popupWindow.dismiss();
+
+        // if the recorder is still we running, we have to stop it, else program breaks
+        try {
+          Log.i("palabras","recorder stopped");
+          myRecordButton.stopRecording();
+        }
+        catch (Exception e) {
+          Log.i("palabras","recorder wasnt running");
+        }
       }
     });
     Button deleteWord = (Button) popupView.findViewById(R.id.borrarPalabra);
@@ -344,7 +354,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       String translation = textfieldTranslation.getText().toString();
       path = getExternalCacheDir().getAbsolutePath() + "/" +word + translation+".3gp";
       PlayButton myPlayButton = new PlayButton(this,path);
-      RecordButton myRecordButton = new RecordButton(this,path);
+      myRecordButton = new RecordButton(this,path,popupWindow);
       LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
       LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
       ll.addView(myRecordButton,lp);
@@ -357,7 +367,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       path = getExternalCacheDir().getAbsolutePath();
       path += "/audiorecordtest.3gp";
       PlayButton myPlayButton = new PlayButton(this,path);
-      RecordButton myRecordButton = new RecordButton(this,path);
+      RecordButton myRecordButton = new RecordButton(this,path,popupWindow);
       LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
       LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
       ll.addView(myRecordButton,lp);

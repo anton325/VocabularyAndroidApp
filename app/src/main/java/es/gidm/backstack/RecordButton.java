@@ -1,10 +1,13 @@
 package es.gidm.backstack;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaRecorder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupWindow;
 
 import java.io.IOException;
 
@@ -12,6 +15,7 @@ class RecordButton extends Button {
     boolean mStartRecording = true;
     MediaRecorder recorder;
     String fileName;
+    PopupWindow pw;
 
     OnClickListener clicker = new OnClickListener() {
         public void onClick(View v) {
@@ -25,11 +29,12 @@ class RecordButton extends Button {
         }
     };
 
-    public RecordButton(Context ctx, String fileName) {
+    public RecordButton(Context ctx, String fileName, PopupWindow pw) {
         super(ctx);
         this.fileName = fileName;
         setText("Start recording");
         setOnClickListener(clicker);
+        this.pw = pw;
     }
     private void onRecord(boolean start) {
         if (start) {
@@ -56,7 +61,7 @@ class RecordButton extends Button {
         recorder.start();
     }
 
-    private void stopRecording() {
+    public void stopRecording() {
         recorder.stop();
         recorder.release();
         recorder = null;

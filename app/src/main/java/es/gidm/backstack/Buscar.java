@@ -51,6 +51,7 @@ public class Buscar extends AppCompatActivity {
 
 
     RadioGroup radioGroup1;
+    public RecordButton myRecordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,9 +240,9 @@ public class Buscar extends AppCompatActivity {
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
         // make it close on touch outside of popup window
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setFocusable(true);
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        popupWindow.setOutsideTouchable(true);
+//        popupWindow.setFocusable(true);
+//        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
@@ -300,6 +301,14 @@ public class Buscar extends AppCompatActivity {
         cancelPopup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // if the recorder is still we running, we have to stop it, else program breaks
+                try {
+                    Log.i("palabras","recorder stopped");
+                    myRecordButton.stopRecording();
+                }
+                catch (Exception e) {
+                    Log.i("palabras","recorder wasnt running");
+                }
                 popupWindow.dismiss();
             }
         });
@@ -312,7 +321,7 @@ public class Buscar extends AppCompatActivity {
         String path = getExternalCacheDir().getAbsolutePath() + "/" +word + translation+".3gp";
         Log.i("buscar path",path);
         PlayButton myPlayButton = new PlayButton(this,path);
-        RecordButton myRecordButton = new RecordButton(this,path);
+        myRecordButton = new RecordButton(this,path,popupWindow);
         LinearLayout ll = (LinearLayout) popupView.findViewById(R.id.recordAndPlay);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         ll.addView(myRecordButton,lp);
