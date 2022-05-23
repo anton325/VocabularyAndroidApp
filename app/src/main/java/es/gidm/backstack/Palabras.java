@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -100,6 +101,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
 
     // set up the RecyclerView
     RecyclerView recyclerView = findViewById(R.id.recyclerWords);
+    recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
     myllm = new LinearLayoutManager(this);
     myllm.scrollToPositionWithOffset(scrollToPosition, 0);
     recyclerView.setLayoutManager(myllm);

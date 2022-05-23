@@ -15,8 +15,9 @@
         android:id="@+id/popupText"
         android:text="Elejir una opcion"/>
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:id="@+id/fieldToEdit"/>
 
     <LinearLayout
