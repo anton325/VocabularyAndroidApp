@@ -199,18 +199,18 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
     @Override
     public void onItemClick(View view, int position) {
 //    Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-    String selectedList = listsOfLanguage.get(position);
-    // save in selectedLists all the lists that have been selected
-    if(colorsOfLists.get(selectedList) == 1) {
-        // deselect this list
-        selectedLists.remove(selectedList);
-        colorsOfLists.put(selectedList,0);
-    }
-    else {
-        // select this list
-        selectedLists.add(selectedList);
-        colorsOfLists.put(selectedList,1);
-    }
-    adapter.notifyDataSetChanged();
+        String selectedList = listsOfLanguage.get(position);
+        // save in selectedLists all the lists that have been selected
+        if(colorsOfLists.get(selectedList) == 1) {
+            // deselect this list
+            selectedLists.remove(selectedList);
+            colorsOfLists.put(selectedList,0);
+        }
+        else {
+            // select this list
+            selectedLists.add(selectedList);
+            colorsOfLists.put(selectedList,1);
+        }
+        adapter.notifyDataSetChanged();
     }
 }

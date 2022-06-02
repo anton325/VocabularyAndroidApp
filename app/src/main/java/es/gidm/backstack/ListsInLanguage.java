@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -29,9 +31,15 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
-public class ListsInLanguage extends AppCompatActivity {
+public class ListsInLanguage extends AppCompatActivity implements MyRecyclerViewAdapter_languages.ItemClickListener{
+
+  MyRecyclerViewAdapter_languages adapter;
+  private HashMap<String, Integer> colorsOfLists;
+  private LinearLayoutManager myllm;
+  private int scrollToPosition;
 
 
   RadioGroup radioGroup1;
@@ -67,33 +75,50 @@ public class ListsInLanguage extends AppCompatActivity {
       listsOfLanguage = gson.fromJson(json,type);
     }
 
+    colorsOfLists = new HashMap<String, Integer>();
+    for(String listName : listsOfLanguage) {
+      colorsOfLists.put(listName,0);
+    }
+    Log.i("elements in list",Integer.toString(listsOfLanguage.size()));
+    Log.i("palabras listas","reached recycler");
+
+    // set up the RecyclerView
+    RecyclerView recyclerView = findViewById(R.id.recyclerLists);
+    myllm = new LinearLayoutManager(this);
+    myllm.scrollToPositionWithOffset(scrollToPosition, 0);
+    recyclerView.setLayoutManager(myllm);
+    adapter = new MyRecyclerViewAdapter_languages(this, listsOfLanguage,colorsOfLists,getApplicationContext());
+    adapter.setClickListener(this);
+    recyclerView.setAdapter(adapter);
+
+
 
     // dynamically add a button for each language
     // the onClickListener they're all gonna share
-    View.OnClickListener btnclick = new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        onButtonShowPopupWindowClickEdit(view, view.getId());
-
-      }
-    };
-    // and save them in array
-    ArrayList<Button> buttons = new ArrayList<Button>();
-    int buttonID = 0;
-    for (final String list : listsOfLanguage) {
-      Button myButton = new Button(this);
-      myButton.setText(list);
-      myButton.setOnClickListener(btnclick);
-      Log.i("list button: ",list);
-      LinearLayout ll = (LinearLayout)findViewById(R.id.buttonLayout);
-      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-      lp.setMargins(75,20,75,0);
-      myButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
-      ll.addView(myButton, lp);
-      myButton.setId(buttonID);
-      buttonID++;
-      buttons.add(myButton);
-    }
+//    View.OnClickListener btnclick = new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//        onButtonShowPopupWindowClickEdit(view, view.getId());
+//
+//      }
+//    };
+//    // and save them in array
+//    ArrayList<Button> buttons = new ArrayList<Button>();
+//    int buttonID = 0;
+//    for (final String list : listsOfLanguage) {
+//      Button myButton = new Button(this);
+//      myButton.setText(list);
+//      myButton.setOnClickListener(btnclick);
+//      Log.i("list button: ",list);
+//      LinearLayout ll = (LinearLayout)findViewById(R.id.buttonLayout);
+//      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//      lp.setMargins(75,20,75,0);
+//      myButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
+//      ll.addView(myButton, lp);
+//      myButton.setId(buttonID);
+//      buttonID++;
+//      buttons.add(myButton);
+//    }
 
 
     // setup add list botton
@@ -151,6 +176,14 @@ public class ListsInLanguage extends AppCompatActivity {
       }
     });
   }
+
+  @Override
+  public void onItemClick(View view, int position) {
+//    Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+    String selectedList = listsOfLanguage.get(position);
+    onButtonShowPopupWindowClickEdit(view,selectedList,position);
+  }
+
   public void onButtonShowPopupWindowClick(View view) {
     Log.i("listsinlanguage","popup");
 
@@ -200,13 +233,16 @@ public class ListsInLanguage extends AppCompatActivity {
       @Override
       public void onClick(View v){
         String nuevaList = textfieldNuevaLengua.getText().toString();
+        colorsOfLists.put(nuevaList,0);
         addList(nuevaList);
         addListToSharedPreferences(listsOfLanguage);
         popupWindow.dismiss();
+        adapter.notifyItemInserted(listsOfLanguage.size()-1);
+        myllm.scrollToPositionWithOffset(listsOfLanguage.size()-1, 0);
         // restart this screen
-        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
-        i.putExtra("language",selectedLanguage);
-        startActivity(i);
+//        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
+//        i.putExtra("language",selectedLanguage);
+//        startActivity(i);
       }
     });
     cancelPopup.setOnClickListener(new View.OnClickListener() {
@@ -230,7 +266,7 @@ public class ListsInLanguage extends AppCompatActivity {
     editor.commit();
   }
 
-  public void onButtonShowPopupWindowClickEdit(View view, final int buttonID) {
+  public void onButtonShowPopupWindowClickEdit(View view, final String listName, final int position) {
     // inflate the layout of the popup window
     LayoutInflater inflater = (LayoutInflater)
             getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -248,7 +284,7 @@ public class ListsInLanguage extends AppCompatActivity {
     popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
     final TextView tvEdit = (TextView) popupView.findViewById(R.id.fieldToEdit);
-    tvEdit.setText(listsOfLanguage.get(buttonID));
+    tvEdit.setText(listName);
     tvEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
@@ -295,13 +331,15 @@ public class ListsInLanguage extends AppCompatActivity {
     deleteListButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        deleteList(listsOfLanguage.get(buttonID));
+        deleteList(listName);
         addListToSharedPreferences(listsOfLanguage);
         popupWindow.dismiss();
+        colorsOfLists.remove(listName);
+        adapter.notifyItemRemoved(position);
         // restart this screen
-        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
-        i.putExtra("language",selectedLanguage);
-        startActivity(i);
+//        Intent i = new Intent(getBaseContext(), ListsInLanguage.class);
+//        i.putExtra("language",selectedLanguage);
+//        startActivity(i);
       }
     });
     cancelPopup.setOnClickListener(new View.OnClickListener() {
@@ -316,10 +354,10 @@ public class ListsInLanguage extends AppCompatActivity {
     nextScreen.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Log.i("StartIntent",listsOfLanguage.get(buttonID));
+        Log.i("StartIntent",listName);
         Intent i = new Intent(getBaseContext(), Palabras.class);
-        Log.i("listsinlanguage",Integer.toString(buttonID));
-        i.putExtra("list", listsOfLanguage.get(buttonID));
+        Log.i("listsinlanguage",listName);
+        i.putExtra("list", listName);
         startActivity(i);
       }
     });

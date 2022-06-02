@@ -18,11 +18,11 @@
 
   <LinearLayout
       android:id="@+id/buttonLayout"
+      android:layout_below="@id/toolbar"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_above="@id/anadirLista"
+      android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:paddingTop="50dp">
+      android:paddingTop="0dp">
 
     <TextView
         android:id="@+id/languageText"
@@ -39,9 +39,17 @@
         android:text="Elije una lista o añade una nueva!"
         android:textColor="#000000"
         android:textSize="20sp" />
-
   </LinearLayout>
 
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recyclerLists"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/buttonLayout"
+      android:layout_above="@id/anadirLista"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      />
 
 
   <Button
@@ -50,7 +58,7 @@
       android:gravity="center"
       android:id="@+id/anadirLista"
       android:background="#f3a22a"
-      android:layout_above="@+id/footer"
+      android:layout_above="@id/footer"
       android:text="nueva Lista"/>
 
 
