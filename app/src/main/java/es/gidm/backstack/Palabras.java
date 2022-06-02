@@ -109,8 +109,6 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
     adapter.setClickListener(this);
     recyclerView.setAdapter(adapter);
 
-
-
     // setup add word button
     Button addList = (Button) findViewById(R.id.anadirPalabra);
     addList.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +166,6 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
   }
   @Override
   public void onItemClick(View view, int position) {
-//    Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     String key = keys.get(position);
     String value = wordsAndTranslations.get(key);
     onButtonShowPopupWindowClick(view,key,value,Boolean.TRUE,position,1);

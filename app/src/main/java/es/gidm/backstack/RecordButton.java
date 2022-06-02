@@ -29,6 +29,22 @@ class RecordButton extends Button {
         }
     };
 
+
+    private void startRecording() {
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFile(fileName);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+            Log.e("Record Button", "prepare() failed");
+        }
+
+        recorder.start();
+    }
+
     public RecordButton(Context ctx, String fileName, PopupWindow pw) {
         super(ctx);
         this.fileName = fileName;
@@ -42,23 +58,6 @@ class RecordButton extends Button {
         } else {
             stopRecording();
         }
-    }
-
-
-    private void startRecording() {
-        recorder = new MediaRecorder();
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        recorder.setOutputFile(fileName);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-
-        try {
-            recorder.prepare();
-        } catch (IOException e) {
-            Log.e("Record Button", "prepare() failed");
-        }
-
-        recorder.start();
     }
 
     public void stopRecording() {

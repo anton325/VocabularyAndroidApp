@@ -123,7 +123,7 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
                     startActivity(i);
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"Elije al menos una",Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(),"Elije al menos una",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -145,7 +145,7 @@ public class AprenderSelectLanguages extends AppCompatActivity implements MyRecy
                     startActivity(i);
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"Elije al menos una",Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(),"Elije al menos una",Toast.LENGTH_SHORT).show();
                 }
 
             }

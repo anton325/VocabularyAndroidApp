@@ -154,7 +154,6 @@ public class Buscar extends AppCompatActivity {
 //        allWords.addAll(additionalWords);
 
 
-
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.buscarTextView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.list_item, wordsShownInSearch);
@@ -163,8 +162,6 @@ public class Buscar extends AppCompatActivity {
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(getApplicationContext(), "ausgewähltes wort " +
-//                        adapterView.getAdapter().getItem(i), Toast.LENGTH_SHORT).show();
                 String word = (String) adapterView.getAdapter().getItem(i);
                 // edit the word a little bit, right now it's in the format: "word - language"
                 String wordClean = word.split("-")[0];
@@ -174,7 +171,6 @@ public class Buscar extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 //Hide:
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-                scheduleNotification(getBaseContext(),1000,10);
                 onButtonShowPopupWindowClick(view, wordClean, translation);
             }
         });
@@ -331,31 +327,6 @@ public class Buscar extends AppCompatActivity {
         LinearLayout.LayoutParams lpp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lpp.setMargins(10,0,20,0);
         ll.addView(myPlayButton, lpp);
-    }
-
-    public void scheduleNotification(Context context, long delay, int notificationId) {//delay is after how much time(in millis) from current time you want to schedule the notification
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setContentTitle("Notification Title")
-                .setContentText("Notifiation Text")
-                .setAutoCancel(true)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-//        .setSmallIcon(R.drawable.ic_launcher_foreground)
-//                .setLargeIcon(((BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_launcher_foreground)).getBitmap())
-
-        Intent intent = new Intent(context, Notification_Screen.class);
-        PendingIntent activity = PendingIntent.getActivity(context, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        builder.setContentIntent(activity);
-
-        Notification notification = builder.build();
-
-        Intent notificationIntent = new Intent(context, MyNotificationPublisher.class);
-        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID, notificationId);
-        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notificationId, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
     }
 
 }
