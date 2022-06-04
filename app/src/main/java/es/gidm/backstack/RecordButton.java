@@ -1,9 +1,12 @@
 package es.gidm.backstack;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaRecorder;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,14 +42,22 @@ class RecordButton extends Button {
     }
     private void startRecording() {
         recorder = new MediaRecorder();
+        try{
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         recorder.setOutputFile(fileName);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        }
+        catch (Exception e) {
+            Log.e("Recorder","failed",e);
+            return;
+        }
+
         try {
             recorder.prepare();
-        } catch (IOException e) {
-            Log.e("Record Button", "prepare() failed");
+        } catch (Exception e) {
+            Log.e("Record Button", "prepare() failed",e);
+            return;
         }
         recorder.start();
     }
@@ -59,8 +70,13 @@ class RecordButton extends Button {
     }
 
     public void stopRecording() {
-        recorder.stop();
-        recorder.release();
+        try {
+            recorder.stop();
+            recorder.release();
+        }
+        catch(Exception e) {
+            Log.e("StopRecording","failed",e);
+        }
         recorder = null;
     }
 }
