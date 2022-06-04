@@ -152,8 +152,8 @@ public class AprenderWriting extends AppCompatActivity {
                     learnOrSolve = 1;
                     wordsLearnt++;
                     // we've just entered a word, so we need to check if the entry was correct or not
-                    String entry = entryUserET.getText().toString();
-                    if (entry.equals(solutionTV.getText().toString())) {
+                    String entry = entryUserET.getText().toString().toLowerCase();
+                    if (entry.equals(solutionTV.getText().toString().toLowerCase())) {
                         // correct
                         solutionTV.setText("Correcto!");
                         solutionTV.setVisibility(View.VISIBLE);
@@ -162,12 +162,14 @@ public class AprenderWriting extends AppCompatActivity {
                     else {
                         String newString = solutionTV.getText().toString();
                         newString = "Incorrecto: "+newString;
+                        solutionTV.setText(newString);
                         solutionTV.setVisibility(View.VISIBLE);
                     }
 
                 }
                 else {
                     learnOrSolve = 0;
+                    entryUserET.setText("");
                     solutionButton.setText("Comprobar soluccion");
                     solutionTV.setVisibility(View.INVISIBLE);
                     loadNextWordsOnScreen(direction);

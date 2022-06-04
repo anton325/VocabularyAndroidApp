@@ -164,6 +164,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
       }
     });
   }
+
   @Override
   public void onItemClick(View view, int position) {
     String key = keys.get(position);
@@ -275,9 +276,9 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
           Log.i("Palabras","wort-aufnahme existiert");
           String path_toexisting = getExternalCacheDir().getAbsolutePath();
           path_toexisting += "/"+key+value+".3gp";
-          Log.i("aufnahme exisitert palabras path existing",path_toexisting);
+          Log.i("palabras: recording exists: path existing",path_toexisting);
           String pathNew = getExternalCacheDir().getAbsolutePath() + "/" +word + translation+".3gp";
-          Log.i("existing: palabras path saved to",pathNew);
+          Log.i("palabras: recording exists: palabras path saved to",pathNew);
           File from = new File(path_toexisting);
           File to = new File(pathNew);
           if(from.exists()){
@@ -297,6 +298,7 @@ public class Palabras extends AppCompatActivity implements MyRecyclerViewAdapter
               from.renameTo(to);
           }
         }
+
         // scroll to that item
 
         // restart this screen

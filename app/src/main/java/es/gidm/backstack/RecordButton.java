@@ -30,6 +30,13 @@ class RecordButton extends Button {
     };
 
 
+    public RecordButton(Context ctx, String fileName, PopupWindow pw) {
+        super(ctx);
+        this.fileName = fileName;
+        setText("Grabar");
+        setOnClickListener(clicker);
+        this.pw = pw;
+    }
     private void startRecording() {
         recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -41,16 +48,7 @@ class RecordButton extends Button {
         } catch (IOException e) {
             Log.e("Record Button", "prepare() failed");
         }
-
         recorder.start();
-    }
-
-    public RecordButton(Context ctx, String fileName, PopupWindow pw) {
-        super(ctx);
-        this.fileName = fileName;
-        setText("Grabar");
-        setOnClickListener(clicker);
-        this.pw = pw;
     }
     private void onRecord(boolean start) {
         if (start) {

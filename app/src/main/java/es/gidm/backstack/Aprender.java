@@ -155,10 +155,6 @@ public class Aprender extends AppCompatActivity {
         }
 
 
-
-
-
-
         // color where we are
         RadioButton currentScreenButton =(RadioButton) findViewById(R.id.aprender);
         currentScreenButton.setTextColor(Color.RED);

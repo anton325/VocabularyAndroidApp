@@ -31,14 +31,6 @@ class PlayButton extends Button {
         setText("Reproducir");
         setOnClickListener(clicker);
     }
-    private void onPlay(boolean start) {
-        if (start) {
-            startPlaying();
-        } else {
-            stopPlaying();
-        }
-    }
-
     private void startPlaying() {
         player = new MediaPlayer();
         try {
@@ -47,9 +39,17 @@ class PlayButton extends Button {
             player.start();
         } catch (IOException e) {
             Log.e("Play Button", "prepare() failed");
-            Toast.makeText(getContext(),"Todavía no existe una grabación",Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(),"Todavía no existe ninguna grabación",Toast.LENGTH_SHORT).show();
         }
     }
+    private void onPlay(boolean start) {
+        if (start) {
+            startPlaying();
+        } else {
+            stopPlaying();
+        }
+    }
+
 
     private void stopPlaying() {
         player.release();
