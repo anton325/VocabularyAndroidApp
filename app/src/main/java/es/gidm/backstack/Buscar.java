@@ -32,6 +32,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -109,7 +110,9 @@ public class Buscar extends AppCompatActivity {
                     wordsTranslationSearch.put(newWord,itsTranslation);
 
                     // we also want to be able to search in the other direction:
-                    String newTranslation = itsTranslation + " - " + l;
+                    // space at the end to distinguish between the two different directions
+
+                    String newTranslation = itsTranslation + " - " + l+" ";
                     wordsShownInSearch.add(newTranslation);
                     wordsTranslationSearch.put(newTranslation,word);
                 }
@@ -160,6 +163,19 @@ public class Buscar extends AppCompatActivity {
                 // edit the word a little bit, right now it's in the format: "word - language"
                 String wordClean = word.split("-")[0];
                 String translation = wordsTranslationSearch.get(word);
+                String rightSide = word.split("-")[1];
+                if (rightSide.charAt(rightSide.length()-1) == ' ') {
+                    Log.i("buscar","falschrum");
+                    String temp = translation;
+                    translation = wordClean;
+                    translation = translation.substring(0,translation.length()-1);
+
+                    wordClean = temp;
+                }
+                else {
+                    // word has a space at the end - get rid of
+                    wordClean = wordClean.substring(0,wordClean.length()-1);
+                }
 
                 // hide keyboard
                 InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -307,10 +323,12 @@ public class Buscar extends AppCompatActivity {
         deleteWord.setVisibility(View.INVISIBLE);
 
         // load and show the buttons
-        // word has a space at the end - get rid of
-        word = word.substring(0,word.length()-1);
         String path = getExternalCacheDir().getAbsolutePath() + "/" +word + translation+".3gp";
         Log.i("buscar path",path);
+        File mediaFile = new File(path);
+        if(!mediaFile.exists()) {
+            path = getExternalCacheDir().getAbsolutePath() + "/" + translation + word + ".3gp";
+        }
         PlayButton myPlayButton = new PlayButton(this,path);
         myRecordButton = new RecordButton(this,path,popupWindow);
         myRecordButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));

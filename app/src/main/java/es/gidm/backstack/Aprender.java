@@ -96,6 +96,7 @@ public class Aprender extends AppCompatActivity {
         }
 
         wordTV = (TextView) findViewById(R.id.palabraAprender);
+        if(accumulatedWords.size()>0) {
         solutionTV = (TextView) findViewById(R.id.palabraSoluccion);
 
         int start = nextWordIndex();
@@ -153,6 +154,10 @@ public class Aprender extends AppCompatActivity {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.addView(myPlayButton, lp);
         }
+    }
+        else{
+        wordTV.setText("No hay palabras en esta lista :(");
+    }
 
 
         // color where we are

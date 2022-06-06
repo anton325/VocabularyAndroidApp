@@ -72,6 +72,7 @@ class RecordButton extends Button {
     public void stopRecording() {
         try {
             recorder.stop();
+            recorder.reset();    // set state to idle
             recorder.release();
         }
         catch(Exception e) {

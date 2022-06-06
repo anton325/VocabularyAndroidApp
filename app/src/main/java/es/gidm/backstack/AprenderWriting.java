@@ -81,34 +81,37 @@ public class AprenderWriting extends AppCompatActivity {
         gson = new Gson();
         // for each list, load all the words and all the translations
         accumulatedWords = new ArrayList<String>();
-        translations = new HashMap<String,String>();
+        translations = new HashMap<String, String>();
         String nameTranslationList;
         String json;
-        for(int i = 0; i < selectedLists.size(); i++){
-            json = sharedpreferences.getString(selectedLists.get(i),"");
+        for (int i = 0; i < selectedLists.size(); i++) {
+            json = sharedpreferences.getString(selectedLists.get(i), "");
             if (!json.isEmpty()) {
-                Type type = new TypeToken<ArrayList<String>>(){}.getType();
-                accumulatedWords.addAll((Collection<? extends String>) gson.fromJson(json,type));
+                Type type = new TypeToken<ArrayList<String>>() {
+                }.getType();
+                accumulatedWords.addAll((Collection<? extends String>) gson.fromJson(json, type));
             }
 
-            nameTranslationList = selectedLists.get(i)+"translation";
-            json = sharedpreferences.getString(nameTranslationList,"");
+            nameTranslationList = selectedLists.get(i) + "translation";
+            json = sharedpreferences.getString(nameTranslationList, "");
             if (!json.isEmpty()) {
-                Type type = new TypeToken<HashMap<String,String>>(){}.getType();
-                translations.putAll((Map<? extends String, ? extends String>) gson.fromJson(json,type));
+                Type type = new TypeToken<HashMap<String, String>>() {
+                }.getType();
+                translations.putAll((Map<? extends String, ? extends String>) gson.fromJson(json, type));
             }
         }
 
         wordTV = (TextView) findViewById(R.id.palabraAprender);
+        if(accumulatedWords.size()>0){
         solutionTV = (TextView) findViewById(R.id.palabraSoluccion);
         entryUserET = (EditText) findViewById(R.id.entryOfUser);
 
         entryUserET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
-                Log.i("aprender writing","clicked");
+                Log.i("aprender writing", "clicked");
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Log.i("aprender writing","if");
+                    Log.i("aprender writing", "if");
                     // hide keyboard
                     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                     //Hide:
@@ -131,8 +134,7 @@ public class AprenderWriting extends AppCompatActivity {
             public void onClick(View view) {
                 if (direction == 1) {
                     direction = 0;
-                }
-                else {
+                } else {
                     direction = 1;
                 }
                 String word = wordTV.getText().toString();
@@ -147,7 +149,7 @@ public class AprenderWriting extends AppCompatActivity {
         solutionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (learnOrSolve == 0){
+                if (learnOrSolve == 0) {
                     solutionButton.setText("Contiuna");
                     learnOrSolve = 1;
                     wordsLearnt++;
@@ -158,16 +160,14 @@ public class AprenderWriting extends AppCompatActivity {
                         solutionTV.setText("Correcto!");
                         solutionTV.setVisibility(View.VISIBLE);
 
-                    }
-                    else {
+                    } else {
                         String newString = solutionTV.getText().toString();
-                        newString = "Incorrecto: "+newString;
+                        newString = "Incorrecto: " + newString;
                         solutionTV.setText(newString);
                         solutionTV.setVisibility(View.VISIBLE);
                     }
 
-                }
-                else {
+                } else {
                     learnOrSolve = 0;
                     entryUserET.setText("");
                     solutionButton.setText("Comprobar soluccion");
@@ -180,14 +180,18 @@ public class AprenderWriting extends AppCompatActivity {
 
         String leftPartPath = accumulatedWords.get(start);
         String rightPartPath = translations.get(accumulatedWords.get(start));
-        String path = getExternalCacheDir().getAbsolutePath() + "/" +leftPartPath + rightPartPath+".3gp";
+        String path = getExternalCacheDir().getAbsolutePath() + "/" + leftPartPath + rightPartPath + ".3gp";
         File mediaFile = new File(path);
-        if(mediaFile.exists()){
-            myPlayButton = new PlayButton(this,path);
+        if (mediaFile.exists()) {
+            myPlayButton = new PlayButton(this, path);
             myPlayButton.setBackground(getDrawable(R.drawable.custom_rectangle_buttons));
             LinearLayout ll = (LinearLayout) findViewById(R.id.buttonLayout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.addView(myPlayButton, lp);
+        }
+    }
+        else{
+            wordTV.setText("No hay palabras en esta lista :(");
         }
 
 
