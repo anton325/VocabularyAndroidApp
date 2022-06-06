@@ -333,6 +333,19 @@ public class ListsInLanguage extends AppCompatActivity implements MyRecyclerView
       public void onClick(View view) {
         deleteList(listName);
         addListToSharedPreferences(listsOfLanguage);
+
+        SharedPreferences.Editor sharedPrefsEditor = sharedpreferences.edit();
+        try {
+          sharedPrefsEditor.remove(listName);
+          String translations = listName + "translation";
+          sharedPrefsEditor.remove(translations);
+          sharedPrefsEditor.commit();
+        }
+        catch (Exception e){
+          Log.e("ListsinLanguage","couldnt delete lists, probs dont exist",e);
+        }
+
+
         popupWindow.dismiss();
         colorsOfLists.remove(listName);
         adapter.notifyItemRemoved(position);

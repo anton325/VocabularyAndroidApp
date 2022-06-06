@@ -32,19 +32,21 @@ public class HomeActivity extends AppCompatActivity {
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
 
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED) {
-            Log.i("home","request");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
-                    10);
-
-
+        Log.i("home",Integer.toString(android.os.Build.VERSION.SDK_INT));
+        // check if we have the permission to record audio
+        if (android.os.Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED) {
+                Log.i("home", "request");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
+                        10);
+            }
+        }
+            // set up buttons in menu
             Button toMisPalabras = (Button) findViewById(R.id.homeToMisPalabras);
             toMisPalabras.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                Toast.makeText(getApplicationContext(),"go to misPalabras",Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(getBaseContext(), MisPalabras.class);
                     startActivity(i);
                 }
@@ -75,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
             RadioButton currentScreenButton = (RadioButton) findViewById(R.id.home);
             currentScreenButton.setTextColor(Color.RED);
 
-
+            // setup button nav bar -
             radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
             radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
@@ -115,10 +117,9 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-    }
+
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                                     int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 10) {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {

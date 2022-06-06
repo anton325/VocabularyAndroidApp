@@ -153,6 +153,7 @@ public class MisPalabras extends AppCompatActivity {
     int width = LinearLayout.LayoutParams.WRAP_CONTENT;
     int height = LinearLayout.LayoutParams.WRAP_CONTENT;
     boolean focusable = true; // lets taps outside the popup also dismiss it
+
     final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
     // make it close on touch outside of popup window
@@ -284,10 +285,29 @@ public class MisPalabras extends AppCompatActivity {
     deleteLanguage.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        deleteLanguage(languages.get(buttonID));
-
         // delete all the associated lists and words
+        SharedPreferences.Editor sharedPrefsEditor = sharedpreferences.edit();
+        try {
+          String json = sharedpreferences.getString(languages.get(buttonID),"");
+          ArrayList<String> listsOfLanguage = new ArrayList<String>();
+          if (!json.isEmpty()) {
+            Type type = new TypeToken<ArrayList<String>>(){}.getType();
+            listsOfLanguage = gson.fromJson(json,type);
+          }
+          for(String listName : listsOfLanguage) {
+            sharedPrefsEditor.remove(listName);
+            String translations = listName + "translation";
+            sharedPrefsEditor.remove(translations);
+          }
+          sharedPrefsEditor.remove(languages.get(buttonID));
+          sharedPrefsEditor.commit();
 
+        }
+        catch (Exception e){
+          Log.e("ListsinLanguage","couldnt delete list, probably doesnt exist",e);
+        }
+
+        deleteLanguage(languages.get(buttonID));
 
         addLanguageToSharedPreferences(languages);
         popupWindow.dismiss();

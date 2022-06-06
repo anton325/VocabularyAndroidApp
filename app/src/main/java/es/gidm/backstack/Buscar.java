@@ -147,6 +147,8 @@ public class Buscar extends AppCompatActivity {
 
 
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.buscarTextView);
+        // put all the words we just created in this adapter, which goes into the
+        // autocompletetextview
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.list_item, wordsShownInSearch);
         autoCompleteTextView.setAdapter(adapter);
@@ -163,6 +165,8 @@ public class Buscar extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 //Hide:
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                // display word + translation with a popup window
                 onButtonShowPopupWindowClick(view, wordClean, translation);
             }
         });
@@ -213,8 +217,6 @@ public class Buscar extends AppCompatActivity {
     }
 
     public void onButtonShowPopupWindowClick(final View view, String word, String translation) {
-        // Check if no view has focus:
-
         Log.i("buscar","popup");
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
@@ -224,7 +226,7 @@ public class Buscar extends AppCompatActivity {
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = false; // lets taps outside the popup also dismiss it
+        boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
         // make it close on touch outside of popup window
@@ -233,6 +235,7 @@ public class Buscar extends AppCompatActivity {
 //        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         // show the popup window
+
         // which view you pass in doesn't matter, it is only used for the window tolken
         Log.i("buscar","before");
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
